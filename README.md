@@ -15,3 +15,9 @@ https://docs.php.earth/faq/misc/structure/
 @optional  
 - [ ] if enough time add email verification  
 - [ ] if more extra time try using google auth  
+
+
+## home.php
+@silvioprendi
+- [ ] style the card structure, up/down buttons
+- [ ] find a search bar design

@@ -59,7 +59,7 @@ if ($username == null || $username == "") {
                 die();
             }
             try {
-                $fileName = "logins.json";
+                $fileName = "/var/log/logins.json";
                 $file = fopen($fileName, "a+");
                 if (!$file) {
                     throw new Exception('File open failed.');

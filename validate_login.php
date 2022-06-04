@@ -29,7 +29,7 @@ if ($password === null || $password === "") {
         $_SESSION["username"] = $username;
         $_SESSION["hashedPass"] = $row["password"];
         try {
-            $fileName = "logins.json";
+            $fileName = "/var/log/logins.json";
             $file = fopen($fileName, "a+");
             if (!$file) {
                 throw new Exception('File open failed.');

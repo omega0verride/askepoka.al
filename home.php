@@ -42,20 +42,28 @@
 
 <body>
     <nav>
+        <div style="float: left; margin-top:15px; margin-left: 25px;">
         <a href="#" id="selectedMenu" class="menus">Home</a>
-        <a href="account.php" class="menus">Account</a>
         <a href="login.php" class="menus">Login</a>
         <a href="register.php" class="menus">Register</a>
+        </div>
+        <div style="display: inline-block; text-align: center; margin-top:15px; margin-right: 25px;">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div style="float: right; margin-top:15px; margin-right: 25px;">
+        <a href="post.php" class="menus">New Post</a>
+        <a href="account.php" class="menus">Account</a>
         <a href="logout.php" class="menus">Log Out</a>
+        </div>
     </nav>
-
 
     <?php
     require("src/auth.php");
     if (checkAuth()) {
         echo "<p><b>Welcome</b></p>";
     } else {
-        include("templates/login_prompt.html");
+        include("templates/loginPrompt.php");
+        loginPrompt();
     }
     ?>
 

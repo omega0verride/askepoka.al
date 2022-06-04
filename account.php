@@ -67,7 +67,8 @@
             header('Location:update.php?title=' . $title . '&name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
         }
     } else {
-        include("templates/login_prompt.html");
+        include("templates/loginPrompt.php");
+        loginPrompt();
     }
 
     ?>

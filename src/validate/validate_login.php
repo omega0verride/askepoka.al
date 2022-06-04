@@ -43,7 +43,11 @@ if ($password === null || $password === "") {
             setcookie("username", $username, time() + (86400 * 30), "/"); // save credentials for 30 days unless the user logs out
             setcookie("hashedPass", md5($password), time() + (86400 * 30), "/"); // save credentials for 30 days unless the user logs out
         }
-        header('Location:../../account.php');
+        if (isset($_GET["redirect"])) {
+            header('Location:'.$_GET["redirect"]);
+        } else {
+            header('Location:../../account.php');
+        }
     } catch (Exception $e) {
         echo $e;
     };

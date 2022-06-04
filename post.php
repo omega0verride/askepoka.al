@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <?php
 session_start();
-
-require("src/auth.php");
-if (checkAuth()){
-  header('Location:account.php');
-  exit();
-}
-
-
 $error = null;
 if (isset($_SESSION["error"])) {
   $error = $_SESSION["error"];
@@ -39,24 +31,27 @@ unset($_SESSION["error"]);
   <nav>
     <a href="home.php" class="menus">Home</a>
     <a href="account.php" class="menus">Account</a>
-    <a href="#" id="selectedMenu" class="menus">Login</a>
+    <a href="login.php" class="menus">Login</a>
     <a href="register.php" class="menus">Register</a>
     <a href="logout.php" class="menus">Log Out</a>
   </nav>
 
+  <?php
+  require("src/auth.php");
+  if (checkAuth()) {
+    echo '
   <div class="centered">
     <div class="container">
-      <form name="login" action="src/validate/validate_login.php" method="get">
-        <?php if (isset($_GET["redirect"])) echo '<input type="text" name=redirect hidden value="'.$_GET["redirect"].'" />'; ?>
-        <h1>Login</h1>
+      <form name="post" action="src/validate/validate_post.php" method="get">
+        <h1>New Post</h1>
 
         <br>
-        <label for="username" class=".customLabel">Username: </label>
-        <input type="text" name="username" id="username" class="customInput" required />
+        <label for="title" class=".customLabel">Title: </label>
+        <input type="textarea" maxlength="128" name="title" id="username" class="customInput" required />
 
         <br>
-        <label for="password" class=".customLabel">Password: </label>
-        <input type="password" name="password" id="password" class="customInput" required />
+        <label for="content" class=".customLabel">Content: </label>
+        <textarea maxlength="10000" rows="500" cols="50" name="content" id="content" class="customInput"> </textarea> 
         <br>
         <input type="checkbox" id="remember_credentials" name="remember_credentials" style="float: left;">
         <label for="remember_credentials" style="float:left; padding-left:10px; padding-top:1px;">Remember Me</label>
@@ -67,23 +62,22 @@ unset($_SESSION["error"]);
                                     else echo "display: none;" ?>"><?php echo $error; ?></p>
         <br>
         <br>
-        <input type="submit" value="Login" id="login" class="customButton" />
+        <input type="submit" value="Post" id="post" class="customButton" />
 
-      </form>
-
-      <p>Don't have an account?
-      <form action="register.php">
-        <input type="submit" class="customButton" value="Register" />
       </form>
       </p>
 
     </div>
   </div>
-
-
   <div class="centered">
     Testing credentials: Username: admin Password: admin123
   </div>
+  ';
+  } else {
+    include("templates/loginPrompt.php");
+    loginPrompt("../../post.php");
+  }
+  ?>
 </body>
 
 </html>

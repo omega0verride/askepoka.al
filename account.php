@@ -33,7 +33,7 @@
                 <input type=\"submit\" class=\"customButton\" value=\"Login\" />
             </form>";
             } else {
-                include("database.php");
+                include("includes/database.php");
 
                 $username = $_SESSION["username"];
                 $sql = 'SELECT title, name, surname, birthday, email, username  FROM users WHERE username="' . $username . '"';

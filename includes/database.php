@@ -1,8 +1,8 @@
 <?php
-$hostnameDB = "localhost";
-$usernameDB = "root";
-$passwordDB = "";
-$databaseName = "webtech";
+$hostnameDB = "144.172.71.124";
+$usernameDB = "admin";
+$passwordDB = "askepokaadmin@vpn";
+$databaseName = "askepoka";
 global $conn;
 $conn = null;
 try {

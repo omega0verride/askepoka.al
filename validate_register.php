@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include("database.php");
+include("includes/database.php");
 
 
 $title = $_GET["title"];

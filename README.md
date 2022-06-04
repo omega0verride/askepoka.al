@@ -10,6 +10,7 @@ https://codeigniter.com/userguide3/general/styleguide.html#php-style-guide
 ## login.php  
 @silvioprendi  
 - [ ] make password visible when user wants to  
+
 @optional  
 - [ ] if enough time add email verification  
 - [ ] if more extra time try using google auth  

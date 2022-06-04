@@ -32,7 +32,7 @@
     ?>
     <div class="centered">
         <div class="container">
-            <form name="update" action="validate_update.php" method="GET" autocomplete="off">
+            <form name="update" action="src/validate/validate_update.php" method="GET" autocomplete="off">
                 <h1 style="text-align: center;">Update Values</h1>
                 <div>
                     <label for="title" style="width: auto;">Title:</label>

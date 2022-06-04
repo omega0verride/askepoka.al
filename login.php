@@ -2,16 +2,11 @@
 <?php
 session_start();
 
-if (isset($_COOKIE["username"]) && isset($_COOKIE["hashedPass"])) {
-  $_SESSION["username"] = $_COOKIE["username"];
-  $_SESSION["hashedPass"] = $_COOKIE["hashedPass"];
-}
-
-if (isset($_SESSION["username"]) && isset($_SESSION["hashedPass"])) {
+require("src/auth.php");
+if (checkAuth()){
   header('Location:account.php');
   exit();
 }
-
 
 
 $error = null;
@@ -42,7 +37,7 @@ unset($_SESSION["error"]);
 
 <body>
   <nav>
-    <a href="welcome.php" class="menus">Home</a>
+    <a href="home.php" class="menus">Home</a>
     <a href="account.php" class="menus">Account</a>
     <a href="#" id="selectedMenu" class="menus">Login</a>
     <a href="register.php" class="menus">Register</a>
@@ -51,7 +46,7 @@ unset($_SESSION["error"]);
 
   <div class="centered">
     <div class="container">
-      <form name="login" action="validate_login.php" method="get">
+      <form name="login" action="src/validate/validate_login.php" method="get">
         <h1>Login</h1>
 
         <br>

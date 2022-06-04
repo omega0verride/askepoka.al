@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include("includes/database.php");
+include("../database.php");
 
 $username = $_GET["username"];
 $password = $_GET["password"];
@@ -23,13 +23,13 @@ if ($password === null || $password === "") {
         if ($row == null || $row["password"] !== md5($password)) {
             echo "Password or username did not match!";
             $_SESSION["error"] = "Password or username did not match!";
-            header('Location:login.php');
+            header('Location:../../login.php');
             die();
         }
         $_SESSION["username"] = $username;
         $_SESSION["hashedPass"] = $row["password"];
         try {
-            $fileName = "/var/log/logins.json";
+            $fileName = "var/log/logins.json";
             $file = fopen($fileName, "a+");
             if (!$file) {
                 throw new Exception('File open failed.');
@@ -43,7 +43,7 @@ if ($password === null || $password === "") {
             setcookie("username", $username, time() + (86400 * 30), "/"); // save credentials for 30 days unless the user logs out
             setcookie("hashedPass", md5($password), time() + (86400 * 30), "/"); // save credentials for 30 days unless the user logs out
         }
-        header('Location:account.php');
+        header('Location:../../account.php');
     } catch (Exception $e) {
         echo $e;
     };

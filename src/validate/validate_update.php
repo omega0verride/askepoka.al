@@ -16,7 +16,7 @@
         echo "Email is invalid!";
     }
 	else {
-        header('Location:account.php?title='.$title.'&name='.$name.'&surname='.$surname.'&date='.$date.'&email='.$email.'&username='.$username);
+        header('Location:../../account.php?title='.$title.'&name='.$name.'&surname='.$surname.'&date='.$date.'&email='.$email.'&username='.$username);
     }
 
 ?>

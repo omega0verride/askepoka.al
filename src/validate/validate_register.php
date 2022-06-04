@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include("includes/database.php");
+include("../database.php");
 
 
 $title = $_GET["title"];
@@ -18,25 +18,25 @@ setcookie("register", serialize($formData), time() + (60 * 60), "/"); // save th
 
 if ($username == null || $username == "") {
     $_SESSION["error"] = "Username cannot be empty!";
-    header('Location:register.php');
+    header('Location:../../register.php');
 } else if ($name == null || $name == "") {
     $_SESSION["error"] =  "Name cannot be empty!";
-    header('Location:register.php');
+    header('Location:../../register.php');
 } else if ($surname == null || $surname == "") {
     $_SESSION["error"] =  "Surname cannot be empty!";
-    header('Location:register.php');
+    header('Location:../../register.php');
 } else if ($email == null || $email == "" || (!filter_var($email, FILTER_VALIDATE_EMAIL))) {
     $_SESSION["error"] =  "Email is invalid!";
-    header('Location:register.php');
+    header('Location:../../register.php');
 } else if ($password == null || $password == "" || strlen($password) < 8) {
     $_SESSION["error"] =  "Password invalid!";
-    header('Location:register.php');
+    header('Location:../../register.php');
 } else if ($confirmPassword == null || $confirmPassword == "") {
     $_SESSION["error"] =  "You need to confirm your password!";
-    header('Location:register.php');
+    header('Location:../../register.php');
 } else if ($confirmPassword !== $password) {
     $_SESSION["error"] =  "Passwords do not match!";
-    header('Location:register.php');
+    header('Location:../../register.php');
 } else {
 
     $sql = 'SELECT 1 FROM users WHERE username="' . $username . '"';
@@ -59,7 +59,7 @@ if ($username == null || $username == "") {
                 die();
             }
             try {
-                $fileName = "/var/log/logins.json";
+                $fileName = "var/log/logins.json";
                 $file = fopen($fileName, "a+");
                 if (!$file) {
                     throw new Exception('File open failed.');
@@ -69,11 +69,11 @@ if ($username == null || $username == "") {
             } catch (Exception $e) {
                 echo "Error: " . $e;
             }
-            header('Location:account.php');
+            header('Location:../../account.php');
         }
         else{
             $_SESSION["error"] =  "Username already taken!";
-            header('Location:register.php');
+            header('Location:../../register.php');
         }
     } catch (Exception $e) {
         echo $e;

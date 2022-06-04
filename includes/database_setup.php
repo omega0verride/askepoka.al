@@ -1,5 +1,5 @@
 <?php
-include("database.php");
+include("../src/database.php");
 
 $queries = [
     "CREATE TABLE IF NOT EXISTS `users` (

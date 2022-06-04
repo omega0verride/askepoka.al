@@ -1,4 +1,6 @@
 <?php
+
+    
 $hostnameDB = "144.172.71.124";
 $usernameDB = "admin";
 $passwordDB = "askepokaadmin@vpn";

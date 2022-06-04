@@ -61,7 +61,7 @@ if (isset($_GET["username"]))
 <body>
 
   <nav>
-    <a href="welcome.php" class="menus">Home</a>
+    <a href="home.php" class="menus">Home</a>
     <a href="account.php" class="menus">Account</a>
     <a href="login.php" class="menus">Login</a>
     <a href="#" id="selectedMenu" class="menus">Register</a>

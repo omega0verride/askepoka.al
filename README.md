@@ -6,10 +6,10 @@ A website to ask questions and share information on different topics within and 
 https://phptherightway.com/  
 https://codeigniter.com/userguide3/general/styleguide.html#php-style-guide  
 
-# TODO:
-> login.php
-@silvioprendi 
-make password visible when user wants to
-@optional
-if enough time add email verification 
-if more extra time try using google auth
+# TODO:  
+> login.php  
+@silvioprendi    
+make password visible when user wants to  
+@optional  
+if enough time add email verification  
+if more extra time try using google auth  

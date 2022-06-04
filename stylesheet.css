@@ -1,0 +1,137 @@
+body {
+  margin-top: 0px;
+  background-color: #121212;
+  color: rgb(196, 196, 196);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.centered {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+.container {
+  text-align: center;
+  padding: 20px 30px 30px 30px;
+  width: 300px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.199);
+  background-color: #161616;
+}
+
+input[type="checkbox"] {
+  border-color: red;
+  background-color: red;
+}
+
+.customButton {
+  background-color: #38d39f;
+  color: black;
+  padding: 8px 15px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.customInput {
+  border: none;
+  border-bottom: solid rgb(143, 143, 143) 1px;
+  margin-bottom: 30px;
+  background: none;
+  color: rgba(255, 255, 255, 0.555);
+  height: 35px;
+  text-decoration: none;
+}
+
+
+.customButton:hover {
+  background-color: rgb(60, 85, 82);
+  color: white;
+}
+
+
+.errorText {
+  color: rgb(247, 47, 47);
+}
+
+nav {
+  text-align: center;
+  background-color: #083b44;
+  color: white;
+  height: 50px;
+  margin-left: -8px;
+  margin-right: -8px;
+  padding-top: 5px;
+}
+
+a.menus {
+  position: relative;
+  top: 25%;
+  padding: 8px 15px;
+  margin-right: 10px;
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+a.menus:hover {
+  background-color: black;
+  color: white;
+}
+
+a#selectedMenu {
+  background-color: black;
+  color: white;
+}
+
+/* disable focus outline */
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) textarea:focus {
+  outline: none;
+}
+
+@media screen and (max-width:600px) {
+  nav {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .container,
+  .customInput {
+    width: 300px;
+  }
+
+}
+
+@media screen and (min-width:600px) {
+  nav {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .container,
+  .customInput {
+    width: 450px;
+  }
+
+}
+
+@media only screen and (min-width: 992px) {
+  nav {
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+
+  .container,
+  .customInput {
+    width: 500px;
+  }
+}

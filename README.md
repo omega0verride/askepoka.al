@@ -5,6 +5,7 @@ A website to ask questions and share information on different topics within and 
 # Coding Conventions Followed
 https://phptherightway.com/  
 https://codeigniter.com/userguide3/general/styleguide.html#php-style-guide  
+https://docs.php.earth/faq/misc/structure/
 
 # TODO:  
 ## login.php  

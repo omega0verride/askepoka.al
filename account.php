@@ -12,8 +12,8 @@
     <nav>
         <a href="home.php" class="menus">Home</a>
         <a href="#" id="selectedMenu" class="menus">Account</a>
-        <a href="login.php" class="menus">Login</a>
-        <a href="register.php" class="menus">Register</a>
+        <a href="login_register.php" class="menus">Login</a>
+        <a href="login_register.php?register" class="menus">Register</a>
         <a href="logout.php" class="menus">Log Out</a>
     </nav>
 
@@ -24,7 +24,7 @@
         include("src/database.php");
 
         $username = $_SESSION["username"];
-        $sql = 'SELECT title, name, surname, birthday, email, username  FROM users WHERE username="' . $username . '"';
+        $sql = 'SELECT role, name, surname, birthday, email, username  FROM users WHERE username="' . $username . '"';
 
         try {
             $stmt = $conn->query($sql);
@@ -32,10 +32,10 @@
             if ($row == null) {
                 echo "User not found!";
                 $_SESSION["error"] = "User not found!";
-                header('Location:login.php');
+                header('Location:login_register.php');
                 die();
             }
-            $title = $row["title"];
+            $role=$row["role"];
             $name = $row["name"];
             $surname = $row["surname"];
             $date = $row["birthday"];
@@ -54,7 +54,7 @@
                 <label>Surname: ' . $surname . '</label></br>
                 <label>Email: ' . $email . '</label></br>
                 <label>Birthday: ' . $date . '</label></br>
-                <label>Title: ' . $title . '</label>
+                <label>Role: ' . $role . '</label>
                 <br>
                 <br>
                 <form method="post">
@@ -64,7 +64,7 @@
                 </div>
                 ';
         if (isset($_POST['updateBtn'])) {
-            header('Location:update.php?title=' . $title . '&name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
+            header('Location:update.php?name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
         }
     } else {
         include("templates/loginPrompt.php");

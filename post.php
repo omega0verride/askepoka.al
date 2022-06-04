@@ -31,8 +31,8 @@ unset($_SESSION["error"]);
   <nav>
     <a href="home.php" class="menus">Home</a>
     <a href="account.php" class="menus">Account</a>
-    <a href="login.php" class="menus">Login</a>
-    <a href="register.php" class="menus">Register</a>
+    <a href="login_register.php" class="menus">Login</a>
+    <a href="login_register.php?register" class="menus">Register</a>
     <a href="logout.php" class="menus">Log Out</a>
   </nav>
 

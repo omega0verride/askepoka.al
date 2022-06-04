@@ -44,8 +44,8 @@
     <nav>
         <div style="float: left; margin-top:15px; margin-left: 25px;">
         <a href="#" id="selectedMenu" class="menus">Home</a>
-        <a href="login.php" class="menus">Login</a>
-        <a href="register.php" class="menus">Register</a>
+        <a href="login_register.php" class="menus">Login</a>
+        <a href="login_register.php?register" class="menus">Register</a>
         </div>
         <div style="display: inline-block; text-align: center; margin-top:15px; margin-right: 25px;">
             <input type="text" placeholder="Search...">

@@ -23,7 +23,6 @@
 
 <body>
     <?php
-    $title = $_GET["title"];
     $name = $_GET["name"];
     $surname = $_GET["surname"];
     $date = $_GET["date"];
@@ -34,15 +33,7 @@
         <div class="container">
             <form name="update" action="src/validate/validate_update.php" method="GET" autocomplete="off">
                 <h1 style="text-align: center;">Update Values</h1>
-                <div>
-                    <label for="title" style="width: auto;">Title:</label>
-                    <select name="title">
-                        <option value="Title 1" <?php if($title=="Title 1") echo "selected";?> >Title 1</option>
-                        <option value="Title 2" <?php if($title=="Title 2") echo "selected";?> >Title 2</option>
-                        <option value="Title 3" <?php if($title=="Title 3") echo "selected";?> >Title 3</option>
-                        <option value="Title 4" <?php if($title=="Title 4") echo "selected";?> >Title 4</option>
-                    </select>
-                </div>
+
 
                 <br>
                 <label for="name">Name: </label>

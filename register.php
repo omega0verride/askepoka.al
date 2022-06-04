@@ -12,7 +12,6 @@ unset($_SESSION["error"]);
 
 if (isset($_COOKIE["register"])) {
   $formData = unserialize($_COOKIE["register"]);
-  $title = $formData["title"];
   $name = $formData["name"];
   $surname = $formData["surname"];
   $date = $formData["date"];
@@ -20,8 +19,7 @@ if (isset($_COOKIE["register"])) {
   $username = $formData["username"];
 }
 
-if (isset($_GET["title"]))
-  $title = $_GET["title"];
+
 if (isset($_GET["name"]))
   $name = $_GET["name"];
 if (isset($_GET["surname"]))
@@ -63,7 +61,7 @@ if (isset($_GET["username"]))
   <nav>
     <a href="home.php" class="menus">Home</a>
     <a href="account.php" class="menus">Account</a>
-    <a href="login.php" class="menus">Login</a>
+    <a href="login_register.php" class="menus">Login</a>
     <a href="#" id="selectedMenu" class="menus">Register</a>
     <a href="logout.php" class="menus">Log Out</a>
   </nav>
@@ -75,17 +73,7 @@ if (isset($_GET["username"]))
       <p class="errorText" style="<?php if (isset($error)) echo "display: block; color: red; text-align: center;";
                                   else echo "display: none;" ?>"><?php echo $error; ?></p>
 
-      <form name="register" action="validate_register.php" method="GET" autocomplete="off">
-
-        <div>
-          <label for="title" style="width: auto;">Title:</label>
-          <select name="title">
-            <option value="Title 1" <?php if ($title == "Title 1") echo "selected"; ?>>Title 1</option>
-            <option value="Title 2" <?php if ($title == "Title 2") echo "selected"; ?>>Title 2</option>
-            <option value="Title 3" <?php if ($title == "Title 3") echo "selected"; ?>>Title 3</option>
-            <option value="Title 4" <?php if ($title == "Title 4") echo "selected"; ?>>Title 4</option>
-          </select>
-        </div>
+      <form name="register" action="src/validate/validate_register.php" method="GET" autocomplete="off">
 
         <br>
         <label for="name">Name: </label>
@@ -121,7 +109,7 @@ if (isset($_GET["username"]))
       </form>
 
       <p style="text-align: center;">Already registred?
-      <form action="login.php" style="text-align: center;">
+      <form action="login_register.php" style="text-align: center;">
         <input type="submit" class="customButton" value="Sign In" />
       </form>
       </p>

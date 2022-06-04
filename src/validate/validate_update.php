@@ -1,5 +1,4 @@
 <?php 
-    $title = $_GET["title"];
     $name = $_GET["name"];
     $surname = $_GET["surname"];
     $date = $_GET["date"];
@@ -16,7 +15,7 @@
         echo "Email is invalid!";
     }
 	else {
-        header('Location:../../account.php?title='.$title.'&name='.$name.'&surname='.$surname.'&date='.$date.'&email='.$email.'&username='.$username);
+        header('Location:../../account.php?name='.$name.'&surname='.$surname.'&date='.$date.'&email='.$email.'&username='.$username);
     }
 
 ?>

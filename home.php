@@ -87,6 +87,50 @@
             </tr>
         </table>
     </div>
+    
+    <br>
+    <div class="card">
+        <table class="card-table">
+            <tr class="card-table">
+                <td rowspan="2" class="card-table">
+                    <div class="votes">
+                        <button>Up</button>
+                        <p id="cnt">0</p>
+                        <button>Down</button>
+                    </div>
+                </td>
+                <td class="card-table card-title">What is Lorem Ipsum?</td>
+            </tr>
+            <tr class="card-table">
+                <td class="card-table card-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</td>
+            </tr>
+            <tr class="card-table">
+                <td colspan="2" class="card-table card-controls">Comments, report, other options</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+    <div class="card">
+        <table class="card-table">
+            <tr class="card-table">
+                <td rowspan="2" class="card-table">
+                    <div class="votes">
+                        <button>Up</button>
+                        <p id="cnt">0</p>
+                        <button>Down</button>
+                    </div>
+                </td>
+                <td class="card-table card-title">What is Lorem Ipsum?</td>
+            </tr>
+            <tr class="card-table">
+                <td class="card-table card-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</td>
+            </tr>
+            <tr class="card-table">
+                <td colspan="2" class="card-table card-controls">Comments, report, other options</td>
+            </tr>
+        </table>
+    </div>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
-    session_start();
-
+    if(!isset($_SESSION)) { 
+        session_start(); 
+    } 
     function checkAuth(){
         if (isset($_SESSION["username"]) && isset($_SESSION["hashedPass"])) {
             return true;

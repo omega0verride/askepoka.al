@@ -20,5 +20,5 @@ https://docs.php.earth/faq/misc/structure/
 
 ## home.php
 @silvioprendi
-- [ ] style the card structure, up/down buttons
-- [ ] find a search bar design
+- [x] style the card structure, up/down buttons
+- [x] find a search bar design

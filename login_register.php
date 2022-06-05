@@ -17,15 +17,20 @@ if (checkAuth()&&$register=="") {
 
 
 
-$error = null;
-if (isset($_SESSION["error"])) {
-  $error = $_SESSION["error"];
+$loginError = null;
+if (isset($_SESSION["loginError"])) {
+  $loginError = $_SESSION["loginError"];
 }
-unset($_SESSION["error"]);
+unset($_SESSION["loginError"]);
+
+$registerError = null;
+if (isset($_SESSION["registerError"])) {
+  $registerError = $_SESSION["registerError"];
+}
+unset($_SESSION["registerError"]);
 
 if (isset($_COOKIE["register"])) {
   $formData = unserialize($_COOKIE["register"]);
-  $title = $formData["title"];
   $name = $formData["name"];
   $surname = $formData["surname"];
   $date = $formData["date"];
@@ -33,8 +38,6 @@ if (isset($_COOKIE["register"])) {
   $username = $formData["username"];
 }
 
-if (isset($_GET["title"]))
-  $title = $_GET["title"];
 if (isset($_GET["name"]))
   $name = $_GET["name"];
 if (isset($_GET["surname"]))
@@ -98,8 +101,8 @@ if (isset($_GET["username"]))
               </div>
               <div class="text sign-up-text">Don't have an account? <label for="flip">Signup now</label></div>
               <br>
-              <p class="errorText" style="<?php if (isset($error)) echo "display: block; color: red; text-align: center;";
-                                          else echo "display: none;" ?>"><?php echo $error; ?></p>
+              <p class="errorText" style="<?php if (isset($loginError)) echo "display: block; color: red; text-align: center;";
+                                          else echo "display: none;" ?>"><?php echo $loginError; ?></p>
               <br>
             </div>
           </form>
@@ -141,8 +144,8 @@ if (isset($_GET["username"]))
               </div>
               <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
               <br>
-                            <p class="errorText" style="<?php if (isset($error)) echo "display: block; color: red; text-align: center;";
-                                          else echo "display: none;" ?>"><?php echo $error; ?></p>
+                            <p class="errorText" style="<?php if (isset($registerError)) echo "display: block; color: red; text-align: center;";
+                                          else echo "display: none;" ?>"><?php echo $registerError; ?></p>
             </div>
           </form>
         </div>

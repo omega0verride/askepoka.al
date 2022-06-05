@@ -24,10 +24,11 @@
         include("src/database.php");
 
         $username = $_SESSION["username"];
-        $sql = 'SELECT role, name, surname, birthday, email, username  FROM users WHERE username="' . $username . '"';
+        $sql = 'SELECT role, name, surname, birthday, email, username  FROM users WHERE username = ?';
 
         try {
-            $stmt = $conn->query($sql);
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(array($username));
             $row = $stmt->fetch();
             if ($row == null) {
                 echo "User not found!";

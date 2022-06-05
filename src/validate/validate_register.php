@@ -16,41 +16,42 @@ $formData = array("name" => $name, "surname" => $surname, "date" => $date, "emai
 setcookie("register", serialize($formData), time() + (60 * 60), "/"); // save the form data for max 1h
 
 if ($username == null || $username == "") {
-    $_SESSION["error"] = "Username cannot be empty!";
+    $_SESSION["registerError"] = "Username cannot be empty!";
     header('Location:../../login_register.php?register');
 } else if ($name == null || $name == "") {
-    $_SESSION["error"] =  "Name cannot be empty!";
+    $_SESSION["registerError"] =  "Name cannot be empty!";
     header('Location:../../login_register.php?register');
 } else if ($surname == null || $surname == "") {
-    $_SESSION["error"] =  "Surname cannot be empty!";
+    $_SESSION["registerError"] =  "Surname cannot be empty!";
     header('Location:../../login_register.php?register');
 } else if ($email == null || $email == "" || (!filter_var($email, FILTER_VALIDATE_EMAIL))) {
-    $_SESSION["error"] =  "Email is invalid!";
+    $_SESSION["registerError"] =  "Email is invalid!";
     header('Location:../../login_register.php?register');
 } else if ($password == null || $password == "" || strlen($password) < 8) {
-    $_SESSION["error"] =  "Password invalid!";
+    $_SESSION["registerError"] =  "Password invalid!";
     header('Location:../../login_register.php?register');
 } else if ($confirmPassword == null || $confirmPassword == "") {
-    $_SESSION["error"] =  "You need to confirm your password!";
+    $_SESSION["registerError"] =  "You need to confirm your password!";
     header('Location:../../login_register.php?register');
 } else if ($confirmPassword !== $password) {
-    $_SESSION["error"] =  "Passwords do not match!";
+    $_SESSION["registerError"] =  "Passwords do not match!";
     header('Location:../../login_register.php?register');
 } else {
 
-    $sql = 'SELECT 1 FROM users WHERE username="' . $username . '"';
+    $sql = 'SELECT 1 FROM users WHERE username = ?';
     try {
-        $stmt = $conn->query($sql);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array($username));
         $row = $stmt->fetch();
-        
+
         // if no  match the username is not used
         if ($row == null) {
             // add to database
             try {
-                $statement = $conn->prepare('INSERT INTO users (username, name, surname, role, email, birthday, password)
+                $stmt = $conn->prepare('INSERT INTO users (username, name, surname, role, email, birthday, password)
     VALUES (?, ?, ?, ?, ?, ?, ?)');
                 $hashedpass = md5($password);
-                $statement->execute([$username, $name, $surname, 1, $email, $date, $hashedpass]);
+                $stmt->execute([$username, $name, $surname, 1, $email, $date, $hashedpass]);
                 $_SESSION["username"] = $username;
                 $_SESSION["hashedPass"] = $hashedpass;
             } catch (Exception $e) {
@@ -69,9 +70,8 @@ if ($username == null || $username == "") {
                 echo "Error: " . $e;
             }
             header('Location:../../account.php');
-        }
-        else{
-            $_SESSION["error"] =  "Username already taken!";
+        } else {
+            $_SESSION["registerError"] =  "Username already taken!";
             header('Location:../../login_register.php?register');
         }
     } catch (Exception $e) {

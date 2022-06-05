@@ -8,21 +8,24 @@ $password = $_GET["password"];
 
 if ($username === null || $username === "") {
     echo "Username cannot be empty!";
+    # we do not need to send an erro to the end user since he will never reach this point from javascript validations
+    # if he bypasses the validations its his fault, the backend does check this anyways
     exit();
 }
 if ($password === null || $password === "") {
     echo "Password cannot be empty!";
     exit();
 } else {
-    $sql = 'SELECT password FROM users WHERE username="' . $username . '"';
+    $sql = 'SELECT password FROM users WHERE username = ?';
 
     try {
-        $stmt = $conn->query($sql);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array($username));
         $row = $stmt->fetch();
 
         if ($row == null || $row["password"] !== md5($password)) {
             echo "Password or username did not match!";
-            $_SESSION["error"] = "Password or username did not match!";
+            $_SESSION["loginError"] = "Password or username did not match!";
             header('Location:../../login_register.php');
             die();
         }

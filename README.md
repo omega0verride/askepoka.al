@@ -11,7 +11,8 @@ https://docs.php.earth/faq/misc/structure/
 ## login.php  
 @silvioprendi  
 - [ ] make password visible when user wants to  
-
+- [ ] add javascript validations
+- [ ] add home button on top left corner in the log in screen
 @optional  
 - [ ] if enough time add email verification  
 - [ ] if more extra time try using google auth  

@@ -4,13 +4,13 @@ session_start();
 
 if (isset($_GET['register']))
   $register = "checked";
-  //log out if wanting to register
-else{
+//log out if wanting to register
+else {
   $register = "";
 }
 
 require("src/auth.php");
-if (checkAuth()&&$register=="") {
+if (checkAuth() && $register == "") {
   header('Location:account.php');
   exit();
 }
@@ -58,6 +58,7 @@ if (isset($_GET["username"]))
   <link rel="stylesheet" href="assets/loginstylesheet.css"">
     <meta name=" viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/71d1e0d8c0.js" crossorigin="anonymous"></script>
+  <script src="passwordVisible.js"></script>
 </head>
 
 <body>
@@ -92,10 +93,33 @@ if (isset($_GET["username"]))
               </div>
               <div class="input-box">
                 <i class="fas fa-lock"></i>
-                <input type="password" name="password" placeholder="Enter your password" required>
+                <input type="password" name="password" id="myPassword" placeholder="Enter your password" required>
               </div>
-              <input type="checkbox" id="remember_credentials" name="remember_credentials" style="float: left;">
-              <label for="remember_credentials" style="float:left; padding-left:10px; margin-top:-5px;">Remember Me</label>
+              <div class="showPass">
+                <label class="custom-checkbox">
+                  <input type="checkbox" onclick="myFunction()" />
+                  <i class=" fa-solid fa-eye unchecked"></i>
+                  <i class="fa-regular fa-eye checked"></i>
+                  <a id="passWrite">Show Password</a>
+                </label>
+              </div> <br>
+              <label class="custom-checkbox">
+                <input type="checkbox" id="remember_credentials" name="remember_credentials" style="float: left;" onclick="updateRemember()">
+                <i class="fa-regular fa-bookmark unchecked"></i>
+                <i class="fa-solid fa-bookmark checked"></i>
+                <a id="rememberWrite">Remeber Me</a>
+                <script>
+                  function updateRemember() {
+                    const cb = document.querySelector('#remember_credentials');
+                    if (!cb.checked) {
+                      console.log("TEST");
+                      document.getElementById("rememberWrite").innerHTML = "Remeber Me";
+                    } else {
+                      document.getElementById("rememberWrite").innerHTML = "Forget Me";
+                    }
+                  }
+                </script>
+              </label>
               <div class="button input-box">
                 <input type="submit" value="Login">
               </div>
@@ -117,7 +141,7 @@ if (isset($_GET["username"]))
               </div>
               <div class="input-box">
                 <i class="fas fa-address-card"></i>
-                <input type="text" placeholder="Enter your surname" name="surname" id="surname" <?php if (isset($surname)) echo "value=" . $surname; ?>  required>
+                <input type="text" placeholder="Enter your surname" name="surname" id="surname" <?php if (isset($surname)) echo "value=" . $surname; ?> required>
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
@@ -139,12 +163,20 @@ if (isset($_GET["username"]))
                 <i class="fa-regular fa-circle-check"></i>
                 <input type="password" placeholder="Confirm your password" name="confirmPassword" id="confirmPassword" required>
               </div>
+              <div class="showPass">
+                <label class="custom-checkbox">
+                  <input type="checkbox" onclick="signUpPass()" />
+                  <i class=" fa-solid fa-eye unchecked"></i>
+                  <i class="fa-regular fa-eye checked"></i>
+                  <a id="passWriteSignUp">Show Password</a>
+                </label>
+              </div> <br>
               <div class="button input-box">
                 <input type="submit" value="Create Account">
               </div>
               <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
               <br>
-                            <p class="errorText" style="<?php if (isset($registerError)) echo "display: block; color: red; text-align: center;";
+              <p class="errorText" style="<?php if (isset($registerError)) echo "display: block; color: red; text-align: center;";
                                           else echo "display: none;" ?>"><?php echo $registerError; ?></p>
             </div>
           </form>

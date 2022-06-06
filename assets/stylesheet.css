@@ -12,22 +12,46 @@ body {
 
 
 .card {
-  padding-left: 3%;
   width: 94%;
   text-align: center;
+  background-image: linear-gradient(to right top, #0066ff, #0088ff, #00a4ff, #00bdff, #00d3ff);
+  border-radius: 40px;
+  margin: 1%;
+ border: 1px solid #77aaff;
+    box-shadow:  -1px 1px #77aaff,
+         -2px 2px #77aaff,
+         -3px 3px #77aaff,
+         -4px 4px #77aaff,
+         -5px 5px #77aaff;
 }
 
 .card-title {
-  text-align: center;
+  display: flex;
+  font-size: 20px;
+  color: black;
+  padding-top: 20px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  font-family: Arial;
+  justify-content: space-between;
 }
 
 .card-content {
   text-align: left;
   padding: 5px;
+  color: black;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .card-controls {
   text-align: right;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  color: rgb(0, 0, 0);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.card-controls:hover{
+color: blue
 }
 
 .votes {
@@ -35,6 +59,7 @@ body {
   text-align: center;
   width: 100px;
   height: 100%;
+  padding-top: 40px;
 }
 
 
@@ -60,6 +85,13 @@ body {
   transition: .5s;
 }
 
+#cnt{
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  margin: 8px
+
+}
 .box:hover input {
   width: 300px;
   background: #272133;
@@ -218,4 +250,28 @@ body:not(.user-is-tabbing) textarea:focus {
   .customInput {
     width: 500px;
   }
+}
+.avatar{
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.posted-by-username{
+  font-size: 13px;
+  padding-left: 10px;
+}
+.posted-by-div{
+  display: flex;
+  flex-direction: row;
+  margin-right: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif ;
+}
+.posted-date{
+  text-align: left;
+  margin-left:50px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color:gold;
+  font-weight: bold;
+  
 }

@@ -9,6 +9,8 @@ require("../src/config.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/71d1e0d8c0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/css/posts_stylesheet.css" />
+    <script src="/askepoka.al/assets/css/post_script.js"></script>
 </head>
 
 <body>
@@ -131,9 +133,65 @@ require("../src/config.php");
                     <label>Username: ' . $username . '</label></br>
                     <label>Name: ' . $name . '</label></br>
                     <label>Surname: ' . $surname . '</label></br>
-                    <label>Email: ' . $email . '</label></br>
+                    <label>Email: ' . $email . '</label></br></div></div>
                     ';
         }
+
+        
+        $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts WHERE `username` = ? ORDER BY timestampPosted DESC LIMIT 10';
+        try {
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$username]);
+            $results = $stmt->fetchAll();
+            $postCNT = 0;
+            foreach ($results as $row) {
+                $postID = $row["postID"];
+                $postTitle = $row["title"];
+                $postContent = $row["content"];
+                $postUser = $row["username"];
+                $timestampPosted = $row["timestampPosted"];
+                $postCNT++;
+                echo '
+                <div class="card" id="post_'.$postID.'">
+                <table class="card-table">
+                    <tr class="card-table">
+                        <td rowspan="3" colspan="1" class="card-table card-votes">
+                            <div class="votes">
+                                <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px" onclick="upVote(1)"></div>
+                                <p class="post-cnt" id="post_1_cnt">0</p>
+                                <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px" onclick="downVote(1)"></div>
+                            </div>
+                        </td>
+                        <td class="card-table card-title">
+                            '.$postTitle.'
+                        </td>
+                        <td  nowrap>
+                            <button onclick="location.href=\'/askepoka.al/account?username='.$postUser.'\'" class="card-button">
+                            <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
+                                <p class="posted-by-username">'.$postUser.'</p>
+                            </div>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="card-table">
+                        <td colspan="3" class="card-table card-content">'.$postContent.'</td>
+                    </tr>
+                    <tr class="card-table">
+                        <td colspan="1" class="card-table card-date">
+                            <p class="posted-date">Date posted: '.$timestampPosted.'</p>
+                        </td colspan="1" class="card-table card-controls">
+                        <td nowrap class="card-table card-controls">
+                            Comments
+                        </td>
+                    </tr>
+                </table>
+            </div>';
+            }
+        } catch (Exception $e) {
+            echo $e;
+        };
+    
+        
 
     } else {
         include(ROOT_DIR . "/templates/loginPrompt.php");

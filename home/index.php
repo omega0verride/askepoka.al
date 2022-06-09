@@ -9,8 +9,8 @@ require("../src/config.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/71d1e0d8c0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/stylesheet.css" />
-    <link rel="stylesheet" type="text/css" href="posts_stylesheet.css" />
-    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/css/posts_stylesheet.css" />
+    <script src="/askepoka.al/assets/css/post_script.js"></script>
 </head>
 
 <body>

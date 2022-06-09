@@ -19,7 +19,7 @@ require("../src/config.php");
     <script src="/askepoka.al/templates/navbar/nav.js"></script>
     <div class="navbar">
         <div class="navbar-container">
-            <button class="menu-item" onclick="location.href='#'">
+            <button class="menu-item" onclick="location.href='/askepoka.al/'">
                 Home
             </button>
 
@@ -62,18 +62,25 @@ require("../src/config.php");
 
     <?php
     require(ROOT_DIR . "/src/database.php");
-    $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts ORDER BY timestampPosted DESC LIMIT 10';
+
+
 
     try {
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
+
+        if (isset($_GET["search"])){
+            $param = "%".strtolower($_GET['search'])."%";
+            $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts WHERE LOWER(title) LIKE ? OR LOWER(content) LIKE ? ORDER BY timestampPosted DESC LIMIT 10';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$param, $param]);
+        }
+        else{
+            $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts ORDER BY timestampPosted DESC LIMIT 10';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+        }
         $results = $stmt->fetchAll();
 
-        // if ($row == null) {
-        //     echo "No posts!";
-        //     $_SESSION["error"] = "No posts found!";
-        //     // die();
-        // }
+
         $postCNT = 0;
         foreach ($results as $row) {
             $postID = $row["postID"];
@@ -83,7 +90,7 @@ require("../src/config.php");
             $timestampPosted = $row["timestampPosted"];
             $postCNT++;
             echo '
-            <div class="card" id="post_'.$postID.'">
+            <div class="card" id="post_' . $postID . '">
             <table class="card-table">
                 <tr class="card-table">
                     <td rowspan="3" colspan="1" class="card-table card-votes">
@@ -94,22 +101,22 @@ require("../src/config.php");
                         </div>
                     </td>
                     <td class="card-table card-title">
-                        '.$postTitle.'
+                        ' . $postTitle . '
                     </td>
                     <td  nowrap>
-                        <button onclick="location.href=\'/askepoka.al/account?username='.$postUser.'\'" class="card-button">
+                        <button onclick="location.href=\'/askepoka.al/account?username=' . $postUser . '\'" class="card-button">
                         <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
-                            <p class="posted-by-username">'.$postUser.'</p>
+                            <p class="posted-by-username">' . $postUser . '</p>
                         </div>
                         </button>
                     </td>
                 </tr>
                 <tr class="card-table">
-                    <td colspan="3" class="card-table card-content">'.$postContent.'</td>
+                    <td colspan="3" class="card-table card-content">' . $postContent . '</td>
                 </tr>
                 <tr class="card-table">
                     <td colspan="1" class="card-table card-date">
-                        <p class="posted-date">Date posted: '.$timestampPosted.'</p>
+                        <p class="posted-date">Date posted: ' . $timestampPosted . '</p>
                     </td colspan="1" class="card-table card-controls">
                     <td nowrap class="card-table card-controls">
                         Comments

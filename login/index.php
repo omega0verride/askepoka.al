@@ -9,9 +9,9 @@ else {
     $register = "";
 }
 
-require(ROOT_DIR."/src/auth.php");
+require(ROOT_DIR . "/src/auth.php");
 if (checkAuth() && $register == "") {
-    header('Location:'.ROOT_URL.'/account');
+    header('Location:' . ROOT_URL . '/account');
     exit();
 }
 

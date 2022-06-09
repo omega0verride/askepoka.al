@@ -21,6 +21,7 @@ label.customLabel {
 }
 
 .textarea {
+ font-family: inherit;
  resize: none;
  margin-top: 5%;
  background-color: #dddddd;

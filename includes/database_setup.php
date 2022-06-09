@@ -24,7 +24,7 @@ $queries = [
     ('test', 'admin', 'admin', 1, 'indritbreti@gmail.com', '2222-02-22', '16d7a4fca7442dda3ad93c9a726597e4');",
     "CREATE TABLE `posts` (
         `postId` int AUTO_INCREMENT NOT NULL,
-        `title` varchar(50) NOT NULL,
+        `title` varchar(100) NOT NULL,
         `content` TEXT(20000) NOT NULL,
         `username` varchar(20) NOT NULL,
         `timestampPosted` timestamp default '1970-01-01 00:00:01', 

@@ -3,10 +3,15 @@
 require("../src/config.php");
 session_start();
 $error = null;
-if (isset($_SESSION["error"])) {
-  $error = $_SESSION["error"];
+if (isset($_SESSION["postError"])) {
+  $error = $_SESSION["postError"];
 }
-unset($_SESSION["error"]);
+unset($_SESSION["postError"]);
+
+if (isset($_GET["title"]))
+  $title=$_GET["title"];
+if (isset($_GET["content"]))
+  $content=$_GET["content"];
 
 ?>
 
@@ -33,17 +38,17 @@ unset($_SESSION["error"]);
 
   <div class="centered">
     <div class="container">
-      <form name="post" action="/askepoka.al/src/validate/validate_post.php" method="get">
+      <form name="post" action="/askepoka.al/src/validate/validate_post.php" method="GET">
         <!-- <h1>New Post</h1> -->
         <div><i>N</i><i>e</i><i>w</i><i> </i><i>P</i><i>o</i><i>s</i><i>t</i></div>
 
         <br>
         <label for="title" class=".customLabel">Title: </label>
-        <input placeholder="Enter a title" type="textarea" maxlength="2000" name="title" id="username" class="customInput" required />
+        <input placeholder="Enter a title" type="textarea" maxlength="100" name="title" id="username" class="customInput" <?php if (isset($title)) echo "value=" . $title; ?>  required />
 
         <br>
         <label for="content" class=".customLabel">Content: </label>
-        <textarea class="textarea" placeholder="Enter some information..." maxlength="10000" rows="500" cols="50" name="content" id="content" class="customInput"></textarea>
+        <textarea class="textarea" placeholder="Enter some information..." maxlength="20000" rows="500" cols="50" name="content" id="content" class="customInput"  required><?php if (isset($content)) echo $content; ?></textarea>
         <br>
 
         <br>
@@ -58,9 +63,6 @@ unset($_SESSION["error"]);
       </p>
 
     </div>
-  </div>
-  <div class="centered">
-    Testing credentials: Username: admin Password: admin123
   </div>
 </body>
 

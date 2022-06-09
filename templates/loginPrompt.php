@@ -10,7 +10,7 @@ function loginPrompt($redirect = null)
         <strong>Please login first.</strong>
         <br>
         <br>
-        <form action=/askepoka.al/login">
+        <form action=/askepoka.al/login>
             <input type="text" name=redirect hidden value="' . $redirect . '" />
             <input type="submit" class="customButton" value="Login" />
         </form>

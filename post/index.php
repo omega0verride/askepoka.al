@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require("src/config.php")
+require("../src/config.php");
 session_start();
 $error = null;
 if (isset($_SESSION["error"])) {

@@ -1,5 +1,6 @@
 <?php
-include("../src/database.php");
+require("../src/config.php");
+require(ROOT_DIR."/src/database.php");
 
 $queries = [
     "DROP TABLE `users`",

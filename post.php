@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+require("src/config.php")
 session_start();
 $error = null;
 if (isset($_SESSION["error"])) {
@@ -28,16 +29,9 @@ unset($_SESSION["error"]);
 </head>
 
 <body>
-  <nav>
-    <a href="home.php" class="menus">Home</a>
-    <a href="account.php" class="menus">Account</a>
-    <a href="login_register.php" class="menus">Login</a>
-    <a href="login_register.php?register" class="menus">Register</a>
-    <a href="logout.php" class="menus">Log Out</a>
-  </nav>
 
   <?php
-  require("src/auth.php");
+  require(ROOT_DIR."/src/auth.php");
   if (checkAuth()) {
     echo '
   <div class="centered">
@@ -74,8 +68,8 @@ unset($_SESSION["error"]);
   </div>
   ';
   } else {
-    include("templates/loginPrompt.php");
-    loginPrompt("../../post.php");
+    include(ROOT_DIR."/templates/loginPrompt.php");
+    loginPrompt(ROOT_URL."/post.php");
   }
   ?>
 </body>

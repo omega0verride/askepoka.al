@@ -1,7 +1,7 @@
 <?php
 session_start();
-
-include("../database.php");
+require("../config.php");
+require(ROOT_DIR."/src/database.php");
 
 
 $name = $_GET["name"];
@@ -17,25 +17,25 @@ setcookie("register", serialize($formData), time() + (60 * 60), "/"); // save th
 
 if ($username == null || $username == "") {
     $_SESSION["registerError"] = "Username cannot be empty!";
-    header('Location:../../login_register.php?register');
+    header('Location:'.ROOT_URL.'/register');
 } else if ($name == null || $name == "") {
     $_SESSION["registerError"] =  "Name cannot be empty!";
-    header('Location:../../login_register.php?register');
+    header('Location:'.ROOT_URL.'/register');
 } else if ($surname == null || $surname == "") {
     $_SESSION["registerError"] =  "Surname cannot be empty!";
-    header('Location:../../login_register.php?register');
+    header('Location:'.ROOT_URL.'/register');
 } else if ($email == null || $email == "" || (!filter_var($email, FILTER_VALIDATE_EMAIL))) {
     $_SESSION["registerError"] =  "Email is invalid!";
-    header('Location:../../login_register.php?register');
+    header('Location:'.ROOT_URL.'/register');
 } else if ($password == null || $password == "" || strlen($password) < 8) {
     $_SESSION["registerError"] =  "Password invalid!";
-    header('Location:../../login_register.php?register');
+    header('Location:'.ROOT_URL.'/register');
 } else if ($confirmPassword == null || $confirmPassword == "") {
     $_SESSION["registerError"] =  "You need to confirm your password!";
-    header('Location:../../login_register.php?register');
+    header('Location:'.ROOT_URL.'/register');
 } else if ($confirmPassword !== $password) {
     $_SESSION["registerError"] =  "Passwords do not match!";
-    header('Location:../../login_register.php?register');
+    header('Location:'.ROOT_URL.'/register');
 } else {
 
     $sql = 'SELECT 1 FROM users WHERE username = ?';
@@ -69,10 +69,10 @@ if ($username == null || $username == "") {
             } catch (Exception $e) {
                 echo "Error: " . $e;
             }
-            header('Location:../../account.php');
+            header('Location:'.ROOT_DIR.'/account');
         } else {
             $_SESSION["registerError"] =  "Username already taken!";
-            header('Location:../../login_register.php?register');
+            header('Location:'.ROOT_URL.'/register');
         }
     } catch (Exception $e) {
         echo $e;

@@ -62,7 +62,7 @@ require("../src/config.php");
 
     <?php
     require(ROOT_DIR . "/src/database.php");
-    $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts LIMIT 10';
+    $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts ORDER BY timestampPosted DESC LIMIT 10';
 
     try {
         $stmt = $conn->prepare($sql);

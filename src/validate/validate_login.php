@@ -43,7 +43,7 @@ if ($password === null || $password === "") {
         if (isset($_GET["redirect"]) && $_GET["redirect"] != null) {
             header('Location:' . $_GET["redirect"]);
         } else {
-            header('Location:'.ROOT_URL.'/account');
+            header('Location:'.ROOT_URL.'/home');
         }
     } catch (Exception $e) {
         echo $e;

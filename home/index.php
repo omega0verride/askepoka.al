@@ -25,7 +25,7 @@ require("../src/config.php");
 
             <button class="menu-item menu-search">
                 <div class="search-box">
-                    <form name="search">
+                    <form name="search" action="/askepoka.al/home">
                         <span class="fa fa-lg fa-search" style="margin-right: -35px;"></span>
                         <input type="text" class="search-input-default" name="search" id="search" spellcheck="false" oninput="searchMouseOut()" onmouseover="searchMouseOver()" onmouseout="searchMouseOut()">
                     </form>
@@ -56,7 +56,7 @@ require("../src/config.php");
     if (!checkAuth()) {
         include(ROOT_DIR . "/templates/loginPrompt.php");
         loginPrompt(ROOT_URL . '/home');
-        // die();
+        die();
     }
     ?>
 
@@ -67,13 +67,12 @@ require("../src/config.php");
 
     try {
 
-        if (isset($_GET["search"])){
-            $param = "%".strtolower($_GET['search'])."%";
+        if (isset($_GET["search"])) {
+            $param = "%" . strtolower($_GET['search']) . "%";
             $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts WHERE LOWER(title) LIKE ? OR LOWER(content) LIKE ? ORDER BY timestampPosted DESC LIMIT 10';
             $stmt = $conn->prepare($sql);
             $stmt->execute([$param, $param]);
-        }
-        else{
+        } else {
             $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts ORDER BY timestampPosted DESC LIMIT 10';
             $stmt = $conn->prepare($sql);
             $stmt->execute();

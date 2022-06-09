@@ -24,7 +24,7 @@ require("../src/config.php");
 
             <button class="menu-item menu-search">
                 <div class="search-box">
-                    <form name="search">
+                    <form name="search" action="/askepoka.al/home">
                         <span class="fa fa-lg fa-search" style="margin-right: -35px;"></span>
                         <input type="text" class="search-input-default" name="search" id="search" spellcheck="false" oninput="searchMouseOut()" onmouseover="searchMouseOver()" onmouseout="searchMouseOut()">
                     </form>
@@ -62,7 +62,7 @@ require("../src/config.php");
             $username = $_SESSION["username"];
         }
 
-        if ($username===$_SESSION["username"]){
+        if ($username === $_SESSION["username"]) {
             $sql = 'SELECT role, name, surname, birthday, email, username  FROM users WHERE username =  ?';
 
             try {
@@ -83,9 +83,9 @@ require("../src/config.php");
             } catch (Exception $e) {
                 echo $e;
             };
-    
-    
-    
+
+
+
             echo '    <div class="centered">
                             <div class="container">
                     <label>Username: ' . $username . '</label></br>
@@ -105,8 +105,7 @@ require("../src/config.php");
             if (isset($_POST['updateBtn'])) {
                 header('Location:' . ROOT_URL . '/update.php?name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
             }
-        }
-        else{
+        } else {
             $sql = 'SELECT name, surname, email, username FROM users WHERE username =  ?';
 
             try {
@@ -125,9 +124,9 @@ require("../src/config.php");
             } catch (Exception $e) {
                 echo $e;
             };
-    
-    
-    
+
+
+
             echo '    <div class="centered">
                             <div class="container">
                     <label>Username: ' . $username . '</label></br>
@@ -137,7 +136,7 @@ require("../src/config.php");
                     ';
         }
 
-        
+
         $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts WHERE `username` = ? ORDER BY timestampPosted DESC LIMIT 10';
         try {
             $stmt = $conn->prepare($sql);
@@ -152,7 +151,7 @@ require("../src/config.php");
                 $timestampPosted = $row["timestampPosted"];
                 $postCNT++;
                 echo '
-                <div class="card" id="post_'.$postID.'">
+                <div class="card" id="post_' . $postID . '">
                 <table class="card-table">
                     <tr class="card-table">
                         <td rowspan="3" colspan="1" class="card-table card-votes">
@@ -163,22 +162,22 @@ require("../src/config.php");
                             </div>
                         </td>
                         <td class="card-table card-title">
-                            '.$postTitle.'
+                            ' . $postTitle . '
                         </td>
                         <td  nowrap>
-                            <button onclick="location.href=\'/askepoka.al/account?username='.$postUser.'\'" class="card-button">
+                            <button onclick="location.href=\'/askepoka.al/account?username=' . $postUser . '\'" class="card-button">
                             <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
-                                <p class="posted-by-username">'.$postUser.'</p>
+                                <p class="posted-by-username">' . $postUser . '</p>
                             </div>
                             </button>
                         </td>
                     </tr>
                     <tr class="card-table">
-                        <td colspan="3" class="card-table card-content">'.$postContent.'</td>
+                        <td colspan="3" class="card-table card-content">' . $postContent . '</td>
                     </tr>
                     <tr class="card-table">
                         <td colspan="1" class="card-table card-date">
-                            <p class="posted-date">Date posted: '.$timestampPosted.'</p>
+                            <p class="posted-date">Date posted: ' . $timestampPosted . '</p>
                         </td colspan="1" class="card-table card-controls">
                         <td nowrap class="card-table card-controls">
                             Comments
@@ -190,9 +189,6 @@ require("../src/config.php");
         } catch (Exception $e) {
             echo $e;
         };
-    
-        
-
     } else {
         include(ROOT_DIR . "/templates/loginPrompt.php");
         loginPrompt(ROOT_URL . "/account");

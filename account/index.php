@@ -60,48 +60,81 @@ require("../src/config.php");
             $username = $_SESSION["username"];
         }
 
-        $sql = 'SELECT role, name, surname, birthday, email, username  FROM users WHERE username =  ?';
+        if ($username===$_SESSION["username"]){
+            $sql = 'SELECT role, name, surname, birthday, email, username  FROM users WHERE username =  ?';
 
-        try {
-            $stmt = $conn->prepare($sql);
-            $stmt->execute(array($username));
-            $row = $stmt->fetch();
-            if ($row == null) {
-                echo "User not found!";
-                $_SESSION["error"] = "User not found!";
-                die();
+            try {
+                $stmt = $conn->prepare($sql);
+                $stmt->execute(array($username));
+                $row = $stmt->fetch();
+                if ($row == null) {
+                    echo "User not found!";
+                    $_SESSION["error"] = "User not found!";
+                    die();
+                }
+                $role = $row["role"];
+                $name = $row["name"];
+                $surname = $row["surname"];
+                $date = $row["birthday"];
+                $email = $row["email"];
+                $username = $row["username"];
+            } catch (Exception $e) {
+                echo $e;
+            };
+    
+    
+    
+            echo '    <div class="centered">
+                            <div class="container">
+                    <label>Username: ' . $username . '</label></br>
+                    <label>Name: ' . $name . '</label></br>
+                    <label>Surname: ' . $surname . '</label></br>
+                    <label>Email: ' . $email . '</label></br>
+                    <label>Birthday: ' . $date . '</label></br>
+                    <label>Role: ' . $role . '</label>
+                    <br>
+                    <br>
+                    <form method="post">
+                        <input type="submit" name="updateBtn" id="updateBtn" class="customButton" value="Update Values" />
+                    </form>
+                    </div>
+                    </div>
+                    ';
+            if (isset($_POST['updateBtn'])) {
+                header('Location:' . ROOT_URL . '/update.php?name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
             }
-            $role = $row["role"];
-            $name = $row["name"];
-            $surname = $row["surname"];
-            $date = $row["birthday"];
-            $email = $row["email"];
-            $username = $row["username"];
-        } catch (Exception $e) {
-            echo $e;
-        };
-
-
-
-        echo '    <div class="centered">
-                        <div class="container">
-                <label>Username: ' . $username . '</label></br>
-                <label>Name: ' . $name . '</label></br>
-                <label>Surname: ' . $surname . '</label></br>
-                <label>Email: ' . $email . '</label></br>
-                <label>Birthday: ' . $date . '</label></br>
-                <label>Role: ' . $role . '</label>
-                <br>
-                <br>
-                <form method="post">
-                    <input type="submit" name="updateBtn" id="updateBtn" class="customButton" value="Update Values" />
-                </form>
-                </div>
-                </div>
-                ';
-        if (isset($_POST['updateBtn'])) {
-            header('Location:' . ROOT_URL . '/update.php?name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
         }
+        else{
+            $sql = 'SELECT name, surname, email, username FROM users WHERE username =  ?';
+
+            try {
+                $stmt = $conn->prepare($sql);
+                $stmt->execute(array($username));
+                $row = $stmt->fetch();
+                if ($row == null) {
+                    echo "<p style=\"text-align: center\">User not found!</p>";
+                    $_SESSION["error"] = "User not found!";
+                    die();
+                }
+                $name = $row["name"];
+                $surname = $row["surname"];
+                $email = $row["email"];
+                $username = $row["username"];
+            } catch (Exception $e) {
+                echo $e;
+            };
+    
+    
+    
+            echo '    <div class="centered">
+                            <div class="container">
+                    <label>Username: ' . $username . '</label></br>
+                    <label>Name: ' . $name . '</label></br>
+                    <label>Surname: ' . $surname . '</label></br>
+                    <label>Email: ' . $email . '</label></br>
+                    ';
+        }
+
     } else {
         include(ROOT_DIR . "/templates/loginPrompt.php");
         loginPrompt(ROOT_URL . "/account");

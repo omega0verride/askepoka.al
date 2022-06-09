@@ -9,6 +9,8 @@ require("../src/config.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/71d1e0d8c0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="posts_stylesheet.css" />
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -51,39 +53,112 @@ require("../src/config.php");
 
     <?php
     require(ROOT_DIR . "/src/auth.php");
-    if (checkAuth()) {
-        echo "<p><b>Welcome</b></p>";
-    } else {
+    if (!checkAuth()) {
         include(ROOT_DIR . "/templates/loginPrompt.php");
         loginPrompt(ROOT_URL . '/home');
+        // die();
     }
     ?>
 
-    <div class="card">
+    <?php
+    require(ROOT_DIR . "/src/database.php");
+    $sql = 'SELECT postID, title, content, username, timestampPosted FROM posts LIMIT 10';
+
+    try {
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+
+        // if ($row == null) {
+        //     echo "No posts!";
+        //     $_SESSION["error"] = "No posts found!";
+        //     // die();
+        // }
+        $postCNT = 0;
+        foreach ($results as $row) {
+            $postID = $row["postID"];
+            $postTitle = $row["title"];
+            $postContent = $row["content"];
+            $postUser = $row["username"];
+            $timestampPosted = $row["timestampPosted"];
+            $postCNT++;
+            echo '
+            <div class="card" id="post_'.$postID.'">
+            <table class="card-table">
+                <tr class="card-table">
+                    <td rowspan="3" colspan="1" class="card-table card-votes">
+                        <div class="votes">
+                            <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px" onclick="upVote(1)"></div>
+                            <p class="post-cnt" id="post_1_cnt">0</p>
+                            <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px" onclick="downVote(1)"></div>
+                        </div>
+                    </td>
+                    <td class="card-table card-title">
+                        '.$postTitle.'
+                    </td>
+                    <td  nowrap>
+                        <button onclick="location.href=\'/askepoka.al/account?username='.$postUser.'\'" class="card-button">
+                        <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
+                            <p class="posted-by-username">'.$postUser.'</p>
+                        </div>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="card-table">
+                    <td colspan="3" class="card-table card-content">'.$postContent.'</td>
+                </tr>
+                <tr class="card-table">
+                    <td colspan="1" class="card-table card-date">
+                        <p class="posted-date">Date posted: '.$timestampPosted.'</p>
+                    </td colspan="1" class="card-table card-controls">
+                    <td nowrap class="card-table card-controls">
+                        Comments
+                    </td>
+                </tr>
+            </table>
+        </div>';
+        }
+    } catch (Exception $e) {
+        echo $e;
+    };
+
+    ?>
+
+
+    <!-- <div class="card" id="post_0">
         <table class="card-table">
             <tr class="card-table">
-                <td rowspan="2" class="card-table">
+                <td rowspan="3" colspan="1" class="card-table card-votes">
                     <div class="votes">
-                        <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px"></div>
-                        <p id="cnt">0</p>
-                        <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px"></div>
+                        <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px" onclick="upVote(1)"></div>
+                        <p class="post-cnt" id="post_1_cnt">0</p>
+                        <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px" onclick="downVote(1)"></div>
                     </div>
                 </td>
-                <td class="card-table card-title">What is Lorem Ipsum? <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
-                        <p class="posted-by-username">Username</p>
-                        <div>
+                <td class="card-table card-title">
+                    title123123123
+                </td>
+                <td  nowrap>
+                    <button onclick="location.href='/askepoka.al/account?username=admin1'" class="card-button">
+                    <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
+                        <p class="posted-by-username">user1</p>
+                    </div>
+                    </button>
                 </td>
             </tr>
             <tr class="card-table">
-                <td class="card-table card-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</td>
+                <td colspan="3" class="card-table card-content">asdf</td>
             </tr>
             <tr class="card-table">
-                <td colspan="2" class="card-table card-controls">
-                    <p class="posted-date">Date posted: 22/10/2002</p>Comments, report, other options
+                <td colspan="1" class="card-table card-date">
+                    <p class="posted-date">Date posted: 22/10/2002</p>
+                </td colspan="1" class="card-table card-controls">
+                <td nowrap class="card-table card-controls">
+                    Comments
                 </td>
             </tr>
         </table>
-    </div>
+    </div> -->
 </body>
 
 </html>

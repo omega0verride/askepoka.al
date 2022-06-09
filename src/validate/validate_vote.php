@@ -1,11 +1,10 @@
 <?php
-session_start();
 require("../config.php");
 require(ROOT_DIR . "/src/database.php");
 
-
-$title = $_GET["title"];
-$content = $_GET["content"];
+if (!checkAuth()){
+    die();
+}
 
 
 if ($title == null || $title == "") {

@@ -15,7 +15,7 @@ unset($_SESSION["error"]);
 <head>
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="assets/stylesheet.css" />
+  <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/stylesheet.css" />
   <style>
     label.customLabel {
       display: inline-block;
@@ -31,12 +31,17 @@ unset($_SESSION["error"]);
 <body>
 
   <?php
-  require(ROOT_DIR."/src/auth.php");
-  if (checkAuth()) {
-    echo '
+  require(ROOT_DIR . "/src/auth.php");
+  if (!checkAuth()) {
+    include(ROOT_DIR . "/templates/loginPrompt.php");
+    loginPrompt(ROOT_URL . "/post");
+    die();
+  }
+  ?>
+
   <div class="centered">
     <div class="container">
-      <form name="post" action="src/validate/validate_post.php" method="get">
+      <form name="post" action="/askepoka.al/src/validate/validate_post.php" method="get">
         <h1>New Post</h1>
 
         <br>
@@ -45,7 +50,7 @@ unset($_SESSION["error"]);
 
         <br>
         <label for="content" class=".customLabel">Content: </label>
-        <textarea maxlength="10000" rows="500" cols="50" name="content" id="content" class="customInput"> </textarea> 
+        <textarea maxlength="10000" rows="500" cols="50" name="content" id="content" class="customInput"> </textarea>
         <br>
         <input type="checkbox" id="remember_credentials" name="remember_credentials" style="float: left;">
         <label for="remember_credentials" style="float:left; padding-left:10px; padding-top:1px;">Remember Me</label>
@@ -66,12 +71,6 @@ unset($_SESSION["error"]);
   <div class="centered">
     Testing credentials: Username: admin Password: admin123
   </div>
-  ';
-  } else {
-    include(ROOT_DIR."/templates/loginPrompt.php");
-    loginPrompt(ROOT_URL."/post.php");
-  }
-  ?>
 </body>
 
 </html>

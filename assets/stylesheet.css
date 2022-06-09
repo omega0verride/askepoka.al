@@ -125,6 +125,10 @@ body:not(.user-is-tabbing) textarea:focus {
     width: 300px;
   }
 
+  .textarea {
+    width: 250px;
+  }
+
 }
 
 @media screen and (min-width:600px) {
@@ -136,6 +140,10 @@ body:not(.user-is-tabbing) textarea:focus {
   .container,
   .customInput {
     width: 450px;
+  }
+
+  .textarea {
+    width: 400px;
   }
 
 }
@@ -150,6 +158,9 @@ body:not(.user-is-tabbing) textarea:focus {
   .customInput {
     width: 500px;
   }
+
+     .textarea {
+       width: 450px;
+     }
+
 }
-
-

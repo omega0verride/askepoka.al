@@ -13,19 +13,11 @@ unset($_SESSION["error"]);
 <html>
 
 <head>
-  <title>Login</title>
+  <title>Post</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/stylesheet.css" />
-  <style>
-    label.customLabel {
-      display: inline-block;
-      width: 150px;
-    }
-
-    #login {
-      width: 100%;
-    }
-  </style>
+  <script src="https://kit.fontawesome.com/71d1e0d8c0.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="post_stylesheet.css">
 </head>
 
 <body>
@@ -42,18 +34,17 @@ unset($_SESSION["error"]);
   <div class="centered">
     <div class="container">
       <form name="post" action="/askepoka.al/src/validate/validate_post.php" method="get">
-        <h1>New Post</h1>
+        <!-- <h1>New Post</h1> -->
+        <div><i>N</i><i>e</i><i>w</i><i> </i><i>P</i><i>o</i><i>s</i><i>t</i></div>
 
         <br>
         <label for="title" class=".customLabel">Title: </label>
-        <input type="textarea" maxlength="128" name="title" id="username" class="customInput" required />
+        <input placeholder="Enter a title" type="textarea" maxlength="2000" name="title" id="username" class="customInput" required />
 
         <br>
         <label for="content" class=".customLabel">Content: </label>
-        <textarea maxlength="10000" rows="500" cols="50" name="content" id="content" class="customInput"> </textarea>
+        <textarea class="textarea" placeholder="Enter some information..." maxlength="10000" rows="500" cols="50" name="content" id="content" class="customInput"></textarea>
         <br>
-        <input type="checkbox" id="remember_credentials" name="remember_credentials" style="float: left;">
-        <label for="remember_credentials" style="float:left; padding-left:10px; padding-top:1px;">Remember Me</label>
 
         <br>
         <br>

@@ -66,14 +66,14 @@ if (isset($_GET["username"]))
         <input type="checkbox" id="flip" <?php echo $register ?>>
         <div class="cover">
             <div class="front">
-                <img src="<?php echo ROOT_URL?>/assets/images/frontImg.jpg" alt="">
+                <img src="/askepoka.al/assets/images/frontImg.jpg" alt="">
                 <div class="text">
                     <span class="text-1">Every new friend is a <br> new adventure</span>
                     <span class="text-2">Let's get connected</span>
                 </div>
             </div>
             <div class="back">
-                <img class="backImg" src="<?php echo ROOT_URL?>/assets/images/backImg.jpg" alt="">
+                <img class="backImg" src="/askepoka.al/assets/images/backImg.jpg" alt="">
                 <div class="text">
                     <span class="text-1" style="z-index: 130;">Complete miles of journey <br> with one step</span>
                     <span class="text-2">Let's get started</span>
@@ -84,7 +84,7 @@ if (isset($_GET["username"]))
             <div class="form-content">
                 <div class="login-form">
                     <div class="title">Login</div>
-                    <form action="<?php echo ROOT_URL?>/src/validate/validate_login.php" method="get">
+                    <form action="/askepoka.al/src/validate/validate_login.php" method="get">
                         <?php if (isset($_GET["redirect"])) echo '<input type="text" name=redirect hidden value="' . $_GET["redirect"] . '" />'; ?>
                         <div class="input-boxes">
                             <div class="input-box">
@@ -133,7 +133,7 @@ if (isset($_GET["username"]))
                 </div>
                 <div class="signup-form">
                     <div class="title">Signup</div>
-                    <form name="register" action="<?php echo ROOT_URL?>/src/validate/validate_register.php" method="GET">
+                    <form name="register" action="/askepoka.al/src/validate/validate_register.php" method="GET">
                         <div class="input-boxes">
                             <div class="input-box">
                                 <i class="fas fa-user"></i>

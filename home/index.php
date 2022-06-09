@@ -8,13 +8,13 @@ require("../src/config.php");
     <title>Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/71d1e0d8c0.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo ROOT_URL ?>/assets/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/stylesheet.css" />
 </head>
 
 <body>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo ROOT_URL ?>/templates/navbar/nav_stylesheet.css" />
-    <script src="<?php echo ROOT_URL ?>/templates/navbar/nav.js"></script>
+    <link rel="stylesheet" type="text/css" href="/askepoka.al/templates/navbar/nav_stylesheet.css" />
+    <script src="/askepoka.al/templates/navbar/nav.js"></script>
     <div class="navbar">
         <div class="navbar-container">
             <button class="menu-item" onclick="location.href='#'">
@@ -32,17 +32,17 @@ require("../src/config.php");
             </button>
 
 
-            <button class="menu-item dropdown" style="float: right;" onclick="location.href='<?php echo ROOT_URL?>/account'">
+            <button class="menu-item dropdown" style="float: right;" onclick="location.href='/askepoka.al/account'">
                 <div class="fa fa-2x fa-user menu-item-div" style="margin-top: 3px; padding-right: 20px; padding-left: 20px;">
                     <div class="dropdown-content">
-                        <a href="<?php echo ROOT_URL ?>/account">Account</a>
-                        <a href="<?php echo ROOT_URL ?>/register">Register</a>
-                        <a href="<?php echo ROOT_URL ?>/logout">Log Out</a>
+                        <a href="/askepoka.al/account">Account</a>
+                        <a href="/askepoka.al/register">Register</a>
+                        <a href="/askepoka.al/logout">Log Out</a>
                     </div>
                 </div>
             </button>
 
-            <button class="menu-item" style="float: right;" onclick="location.href='<?php echo ROOT_URL ?>/post'">
+            <button class="menu-item" style="float: right;" onclick="location.href='/askepoka.al/post'">
                 <div class="fa fa-2x fa-square-plus"></div>
                 <div class="menu-item-div" style="margin-top: 8px; margin-left: 10px;">New Post</div>
             </button>
@@ -69,7 +69,7 @@ require("../src/config.php");
                         <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px"></div>
                     </div>
                 </td>
-                <td class="card-table card-title">What is Lorem Ipsum? <div class="posted-by-div"><img src="<?php echo ROOT_URL?>/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
+                <td class="card-table card-title">What is Lorem Ipsum? <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
                         <p class="posted-by-username">Username</p>
                         <div>
                 </td>

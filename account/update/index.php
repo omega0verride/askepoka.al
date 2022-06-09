@@ -7,7 +7,6 @@ if (!checkAuth()) {
     include(ROOT_DIR . "/templates/loginPrompt.php");
     loginPrompt(ROOT_URL . "/account/update");
 }
-session_start();
 
 $updateError = null;
 if (isset($_SESSION["updateError"])) {

@@ -103,7 +103,7 @@ require("../src/config.php");
                     </div>
                     ';
             if (isset($_POST['updateBtn'])) {
-                header('Location:' . ROOT_URL . '/update.php?name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
+                header('Location:update?name=' . $name . '&surname=' . $surname . '&date=' . $date . '&email=' . $email . '&username=' . $username);
             }
         } else {
             $sql = 'SELECT name, surname, email, username FROM users WHERE username =  ?';

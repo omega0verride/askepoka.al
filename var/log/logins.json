@@ -1,12 +1,5 @@
-{"username": "admin", "timestamp": 1654356696},
-{"username": "indritbreti", "timestamp": 1654356709},
-{"username": "admin", "timestamp": 1654356892},
-{"username": "admin", "timestamp": 1654356913},
-{"username": "admin1", "timestamp": 1654357111},
-{"username": "admin2", "timestamp": 1654357262},
-{"username": "test", "timestamp": 1654358261},
-{"username": "admin", "timestamp": 1654366022},
-{"username": "admin", "timestamp": 1654366115},
-{"username": "sprendi", "timestamp": 1654366688},
-{"username": "admin", "timestamp": 1654367732},
-{"username": "admin", "timestamp": 1654369815},
+{
+    "logins": [
+        {"username": "admin", "timestamp": 1654356696}
+        ]
+}

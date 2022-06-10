@@ -63,9 +63,8 @@ require("../src/config.php");
 
     <?php
     require(ROOT_DIR . "/src/database.php");
-
-
-
+    require(ROOT_DIR . "/src/functions.php");
+    
     try {
 
         if (isset($_GET["search"])) {
@@ -84,7 +83,7 @@ require("../src/config.php");
         foreach ($results as $row) {    
             $postId = $row["postId"];
             $postTitle = $row["title"];
-            $postContent = $row["content"];
+            $postContent = makeUrltoLink($row["content"]);
             $postUser = $row["username"];
             $timestampPosted = $row["timestampPosted"];
             $postCNT++;

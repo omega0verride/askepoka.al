@@ -57,6 +57,8 @@ require("../src/config.php");
     if (checkAuth()) {
         require(ROOT_DIR . "/src/database.php");
 
+        require(ROOT_DIR . "/src/functions.php");
+
         if (isset($_GET["username"]) &&  $_GET["username"] !== null) {
             $username = $_GET["username"];
         } else {
@@ -144,10 +146,10 @@ require("../src/config.php");
             $stmt->execute([$username]);
             $results = $stmt->fetchAll();
             $postCNT = 0;
-            foreach ($results as $row) {    
+            foreach ($results as $row) {
                 $postId = $row["postId"];
                 $postTitle = $row["title"];
-                $postContent = $row["content"];
+                $postContent = makeUrltoLink($row["content"]);
                 $postUser = $row["username"];
                 $timestampPosted = $row["timestampPosted"];
                 $postCNT++;
@@ -157,18 +159,18 @@ require("../src/config.php");
                 $stmt_votes->execute([$username, $postId]);
                 $results_votes = $stmt_votes->fetch();
 
-                $votesCNT=$results_votes["cnt"];
-                if ($votesCNT==null)
-                $votesCNT=0;
+                $votesCNT = $results_votes["cnt"];
+                if ($votesCNT == null)
+                    $votesCNT = 0;
                 echo '
                 <div class="card" id="post_' . $postId . '">
                 <table class="card-table">
                     <tr class="card-table">
                         <td rowspan="3" colspan="1" class="card-table card-votes">
                             <div class="votes">
-                                <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px" onclick="upVote('.$postId.')"></div>
-                                <p class="post-cnt" id="post_1_cnt">'.$votesCNT.'</p>
-                                <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px" onclick="downVote('.$postId.')"></div>
+                                <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px" onclick="upVote(' . $postId . ')"></div>
+                                <p class="post-cnt" id="post_1_cnt">' . $votesCNT . '</p>
+                                <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px" onclick="downVote(' . $postId . ')"></div>
                             </div>
                         </td>
                         <td class="card-table card-title">

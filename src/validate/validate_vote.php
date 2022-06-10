@@ -1,32 +1,40 @@
 <?php
 require("../config.php");
 require(ROOT_DIR . "/src/database.php");
+require(ROOT_DIR . "/src/auth.php");
 
-if (!checkAuth()){
+if (!checkAuth()) {
     die();
 }
 
 
-if ($title == null || $title == "") {
-    $_SESSION["postError"] = "Title cannot be empty!";
-    header('Location:' . ROOT_URL . '/post?content=' . $content);
-} else if ($content == null || $content == "") {
-    $_SESSION["postError"] =  "Content cannot be empty!";
-    header('Location:' . ROOT_URL . '/post?title=' . $title);
-} else if (strlen($title) > 100) {
-    $_SESSION["postError"] =  "Title cannot be longer than 100 characters!";
-    header('Location:' . ROOT_URL . '/post?title=' . $title . '&content=' . $content);
-} else if (strlen($content) > 20000) {
-    $_SESSION["postError"] =  "Content cannot be longer than 20 000 characters!";
-    header('Location:' . ROOT_URL . '/post?title=' . $title . '&content=' . $content);
-} else {
-    try {
-        $stmt = $conn->prepare('INSERT INTO posts (postID, title, content, username, timestampPosted, timestampUpdated)
-    VALUES (?, ?, ?, ?, ?, ?)');
-        $stmt->execute([null, $title, $content, $_SESSION["username"], null, null]);
-    } catch (Exception $e) {
-        echo $e;
-        die();
+$postId = $_GET["postId"];
+$value = $_GET["value"];
+$username = $_SESSION["username"];
+$sql = 'SELECT voteId, value FROM votes WHERE username = ? AND postId = ?';
+
+try {
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$username, $postId]);
+    $row = $stmt->fetch();
+
+    if ($vlaue = 0) {
+        if ($row != null) {
+            $sql = 'DELETE FROM votes WHERE voteId=?';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$postId, $row["voteId"]]);
+        }
+    } else {
+        if ($row == null) {
+            $sql = 'INSERT INTO votes (voteId, postId, username, value, timestampSubmitted) VALUES (null, ?, ?, ?, null)';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$postId, $username, $value]);
+        } else if ($row["value"] !== $vlaue) {
+            $sql = 'UPDATE votes SET value=? WHERE voteId=?';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$value, $row["voteId"]]);
+        }
     }
-    header('Location:' . ROOT_URL . '/account');
-}
+} catch (Exception $e) {
+    echo $e;
+};

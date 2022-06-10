@@ -45,7 +45,18 @@ $queries = [
     (null,'What is a technology stack?','The technology stack is a set of frameworks and tools used to develop a software product. This set of frameworks and tools are very specifically chosen to work together in creating a well-functioning software.\r\n\r\nHere are some examples of widely used web development technology stacks in use today:\r\n\r\nMERN (MongoDB, ExpressJS, ReactJS, NodeJS)\r\nLAMP (Linux, Apache, MySQL, PHP)\r\nMEAN (MongoDB, ExpressJS, AngularJS, NodeJS)','admin','2022-06-09 21:49:27','2022-06-09 21:49:27'),
     (null,'9th Career Fair','Dear all,\r\n\r\nHope you are doing well!\r\n\r\nEPOKA University is proud to announce the organization of the \"9th Career Fair\" on May 18, 2022. In the activity will be participating prestigious companies and the aim will be to offer internship opportunities to second-year students and employment opportunities for the last-year students, master students and to our graduates.\r\n\r\nDate: Wednesday, May 18, 2022.\r\nTime: 10:00.\r\nVenue: EPOKA University Campus, A-Building, Ground Floor.','admin','2022-06-09 21:50:11','2022-06-09 21:50:11');
     ",
-
+    "CREATE TABLE `votes` (
+        `voteId` int AUTO_INCREMENT NOT NULL,
+        `postId` int NOT NULL,
+        `username` varchar(20) NOT NULL,
+        `value` boolean NOT NULL,
+        `timestampSubmitted` timestamp default now() on update now(), 
+    	FOREIGN KEY (username) REFERENCES users(username),    
+    	FOREIGN KEY (postId) REFERENCES posts(postId),    
+        PRIMARY KEY (voteId)
+    );
+    ",
+    
 ];
 
 // insert into posts VALUES(null, "What is Lorem Ipsum?", "asdasdasdasdasdsfsdfsdgsg", "admin", null, null);

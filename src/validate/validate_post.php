@@ -22,7 +22,7 @@ if ($title == null || $title == "") {
     header('Location:' . ROOT_URL . '/post?title=' . $title . '&content=' . $content);
 } else {
     try {
-        $stmt = $conn->prepare('INSERT INTO posts (postID, title, content, username, timestampPosted, timestampUpdated)
+        $stmt = $conn->prepare('INSERT INTO posts (postId, title, content, username, timestampPosted, timestampUpdated)
     VALUES (?, ?, ?, ?, ?, ?)');
         $stmt->execute([null, $title, $content, $_SESSION["username"], null, null]);
     } catch (Exception $e) {

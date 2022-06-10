@@ -140,7 +140,10 @@ require("../src/config.php");
         }
 
 
-        $sql = 'SELECT postId, title, content, username, timestampPosted FROM posts WHERE `username` = ? ORDER BY timestampPosted DESC LIMIT 10';
+        $sql = 'SELECT `posts`.`postId` as postId, title, content, `posts`.`username` as username, timestampPosted, timestampUpdated, voteId, value, timestampSubmitted
+        FROM `posts`
+        LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId` AND `votes`.`username`= ?
+        ORDER BY timestampPosted DESC LIMIT 10';
         try {
             $stmt = $conn->prepare($sql);
             $stmt->execute([$username]);
@@ -154,14 +157,20 @@ require("../src/config.php");
                 $timestampPosted = $row["timestampPosted"];
                 $postCNT++;
 
-                $sql_votes = 'SELECT SUM(value) as cnt FROM votes WHERE `username` = ? AND `postId` = ?';
+                $sql_votes = 'SELECT SUM(value) as cnt FROM votes WHERE `postId` = ?';
                 $stmt_votes = $conn->prepare($sql_votes);
-                $stmt_votes->execute([$username, $postId]);
+                $stmt_votes->execute([$postId]);
                 $results_votes = $stmt_votes->fetch();
 
                 $votesCNT = $results_votes["cnt"];
                 if ($votesCNT == null)
                     $votesCNT = 0;
+
+
+                $userVoteValue = $row["value"];
+                if ($userVoteValue == null)
+                    $userVoteValue = 0;
+
                 echo '
                 <div class="card" id="post_' . $postId . '">
                 <table class="card-table">

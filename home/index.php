@@ -69,17 +69,25 @@ require("../src/config.php");
 
         if (isset($_GET["search"])) {
             $param = "%" . strtolower($_GET['search']) . "%";
-            $sql = 'SELECT postId, title, content, username, timestampPosted FROM posts WHERE LOWER(title) LIKE ? OR LOWER(content) LIKE ? ORDER BY timestampPosted DESC LIMIT 10';
+            $sql = 'SELECT `posts`.`postId` as postId, title, content, `posts`.`username` as username, timestampPosted, timestampUpdated, voteId, value, timestampSubmitted
+            FROM `posts`
+            LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId` AND `votes`.`username`= ? WHERE LOWER(title) LIKE ? OR LOWER(content) LIKE ? ORDER BY timestampPosted DESC LIMIT 10';
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$param, $param]);
+            $stmt->execute([$_SESSION["username"], $param, $param]);
         } else {
-            $sql = 'SELECT postId, title, content, username, timestampPosted FROM posts ORDER BY timestampPosted DESC LIMIT 10';
+            $sql = 'SELECT `posts`.`postId` as postId, title, content, `posts`.`username` as username, timestampPosted, timestampUpdated, voteId, value, timestampSubmitted
+            FROM `posts`
+            LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId` AND `votes`.`username`= ? 
+            ORDER BY timestampPosted DESC LIMIT 10;';
             $stmt = $conn->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([$_SESSION["username"]]);
         }
         $results = $stmt->fetchAll();
 
         $postCNT = 0;
+        
+      
+                
         foreach ($results as $row) {    
             $postId = $row["postId"];
             $postTitle = $row["title"];
@@ -88,23 +96,35 @@ require("../src/config.php");
             $timestampPosted = $row["timestampPosted"];
             $postCNT++;
 
-            $sql_votes = 'SELECT SUM(value) as cnt FROM votes WHERE `username` = ? AND `postId` = ?';
+            $sql_votes = 'SELECT SUM(value) as cnt FROM votes WHERE `postId` = ?';
             $stmt_votes = $conn->prepare($sql_votes);
-            $stmt_votes->execute([$postUser, $postId]);
+            $stmt_votes->execute([$postId]);
             $results_votes = $stmt_votes->fetch();
 
             $votesCNT=$results_votes["cnt"];
             if ($votesCNT==null)
                 $votesCNT=0;
+
+            $userVoteValue = $row["value"];
+            if ($userVoteValue == null)
+                $userVoteValue = 0;
+            $upBtnClass="";
+            if ($userVoteValue==1){
+                $upBtnClass="vote-btn-checked";
+            }
+            $downBtnClass="";
+            if ($userVoteValue==-1){
+                $downBtnClass="vote-btn-checked";
+            }
             echo '
-            <div class="card" id="post_' . $postId . '">
+            <div class="card" id="post_'.$postId.'">
             <table class="card-table">
                 <tr class="card-table">
                     <td rowspan="3" colspan="1" class="card-table card-votes">
                         <div class="votes">
-                            <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px" onclick="upVote('.$postId.')"></div>
-                            <p class="post-cnt" id="post_1_cnt">'.$votesCNT.'</p>
-                            <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px" onclick="downVote('.$postId.')"></div>
+                            <div id="upBtn_'.$postId.'" class="fa-solid fa-caret-up vote-btn-unchecked '.$upBtnClass.'" onclick="upVote('.$postId.')"></div>
+                            <p class="post-cnt" id="post_'.$postId.'_cnt">'.$votesCNT.'</p>
+                            <div id="downBtn_'.$postId.'" class="fa-solid fa-caret-down vote-btn-unchecked '.$downBtnClass.'" onclick="downVote('.$postId.')"></div>
                         </div>
                     </td>
                     <td class="card-table card-title">

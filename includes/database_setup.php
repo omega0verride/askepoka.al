@@ -4,6 +4,7 @@ require(ROOT_DIR . "/src/database.php");
 
 $queries = [
     "SET GLOBAL time_zone = '+2:00';",
+    "DROP TABLE `votes`",
     "DROP TABLE `posts`",
     "DROP TABLE `users`",
     "CREATE TABLE IF NOT EXISTS `users` (
@@ -56,8 +57,32 @@ $queries = [
         PRIMARY KEY (voteId)
     );
     ",
-    
+    "INSERT  IGNORE INTO `votes` VALUES
+        (null, 1, 'admin', 1, null),
+        (null, 3, 'admin', -1, null),
+        (null, 1, 'admin2', 1, null),
+        (null, 3, 'admin2', 1, null),
+        (null, 3, 'admin1', 1, null);
+    ",
+
 ];
+
+// SELECT *
+// FROM `posts`
+// LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId`
+
+// UNION
+
+// SELECT *
+// FROM `posts`
+// RIGHT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId`
+
+    //  SELECT *
+// FROM `posts`
+// RIGHT OUTER JOIN `votes` ON `posts`.`postId` = `votes`.`postId`;SELECT *
+// FROM `posts`
+// RIGHT OUTER JOIN `votes` ON `posts`.`postId` = `votes`.`postId`;
+
 
 // insert into posts VALUES(null, "What is Lorem Ipsum?", "asdasdasdasdasdsfsdfsdgsg", "admin", null, null);
 // insert into posts VALUES(null, "What is Lorem Ipsum?", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "admin", null, null), (null, "What is Lorem Ipsum?", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "test", null, null);

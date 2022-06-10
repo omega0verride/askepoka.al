@@ -14,8 +14,9 @@ function searchMouseOver() {
     element.className = "search-input-default search-input-hover";
 }
 
-function accountMenuOpen(){
-    document.getElementById("navAccountMenu").
-}
+// trying touch events
+// function accountMenuOpen(){
+//     document.getElementById("navAccountMenu");
+// }
 
-theElement.addEventListener("touchend", accountMenuOpen, false);
+// theElement.addEventListener("touchend", accountMenuOpen, false);

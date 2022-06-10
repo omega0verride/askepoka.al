@@ -8,3 +8,6 @@ https://phptherightway.com/
 https://codeigniter.com/userguide3/general/styleguide.html#php-style-guide  
 https://docs.php.earth/faq/misc/structure/
 
+## Testing credentials
+admin
+admin123

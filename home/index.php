@@ -34,8 +34,7 @@ require("../src/config.php");
 
             </button>
 
-
-            <button class="menu-item dropdown" style="float: right;" onclick="location.href='/askepoka.al/account'">
+            <button class="menu-item dropdown" id="navAccountMenu" style="float: right;" onclick="location.href='/askepoka.al/account'">
                 <div class="fa fa-2x fa-user menu-item-div" style="margin-top: 3px; padding-right: 20px; padding-left: 20px;">
                     <div class="dropdown-content">
                         <a href="/askepoka.al/account">Account</a>

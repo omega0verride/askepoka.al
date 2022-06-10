@@ -25,7 +25,7 @@ require("../src/config.php");
 
             <button class="menu-item menu-search">
                 <div class="search-box">
-                    <form name="search" action="/askepoka.al/home">
+                    <form name="search" action="/askepoka.al/account">
                         <span class="fa fa-lg fa-search" style="margin-right: -35px;"></span>
                         <input type="text" class="search-input-default" name="search" id="search" spellcheck="false" oninput="searchMouseOut()" onmouseover="searchMouseOver()" onmouseout="searchMouseOut()">
                     </form>
@@ -34,10 +34,10 @@ require("../src/config.php");
             </button>
 
 
-            <button class="menu-item dropdown" style="float: right;" onclick="location.href='#'">
+            <button class="menu-item dropdown" style="float: right;" onclick="location.href='/askepoka.al/account'">
                 <div class="fa fa-2x fa-user menu-item-div" style="margin-top: 3px; padding-right: 20px; padding-left: 20px;">
                     <div class="dropdown-content">
-                        <a href="#">Account</a>
+                        <a href="/askepoka.al/account">Account</a>
                         <a href="/askepoka.al/register">Register</a>
                         <a href="/askepoka.al/logout">Log Out</a>
                     </div>
@@ -140,15 +140,29 @@ require("../src/config.php");
         }
 
 
-        $sql = 'SELECT `posts`.`postId` as postId, title, content, `posts`.`username` as username, timestampPosted, timestampUpdated, voteId, value, timestampSubmitted
-        FROM `posts`
-        LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId` AND `votes`.`username`= ?
-        ORDER BY timestampPosted DESC LIMIT 10';
+
         try {
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$username]);
+
+            if (isset($_GET["search"])) {
+                $param = "%" . strtolower($_GET['search']) . "%";
+                $sql = 'SELECT `posts`.`postId` as postId, title, content, `posts`.`username` as username, timestampPosted, timestampUpdated, voteId, value, timestampSubmitted
+                FROM `posts`
+                LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId` AND `votes`.`username`= ? WHERE `posts`.`username` = ? AND (LOWER(title) LIKE ? OR LOWER(content) LIKE ?)
+                ORDER BY timestampPosted DESC LIMIT 10';
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$username, $username, $param, $param]);
+            } else {
+                $sql = 'SELECT `posts`.`postId` as postId, title, content, `posts`.`username` as username, timestampPosted, timestampUpdated, voteId, value, timestampSubmitted
+                FROM `posts`
+                LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId` AND `votes`.`username`= ? WHERE `posts`.`username` = ?
+                ORDER BY timestampPosted DESC LIMIT 10';
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$username, $username]);
+            }
             $results = $stmt->fetchAll();
+
             $postCNT = 0;
+
             foreach ($results as $row) {
                 $postId = $row["postId"];
                 $postTitle = $row["title"];
@@ -170,42 +184,49 @@ require("../src/config.php");
                 $userVoteValue = $row["value"];
                 if ($userVoteValue == null)
                     $userVoteValue = 0;
-
+                $upBtnClass = "";
+                if ($userVoteValue == 1) {
+                    $upBtnClass = "vote-btn-checked";
+                }
+                $downBtnClass = "";
+                if ($userVoteValue == -1) {
+                    $downBtnClass = "vote-btn-checked";
+                }
                 echo '
                 <div class="card" id="post_' . $postId . '">
-                <table class="card-table">
-                    <tr class="card-table">
-                        <td rowspan="3" colspan="1" class="card-table card-votes">
-                            <div class="votes">
-                                <div class="fa-solid fa-caret-up" style="color: black; font-size: 30px" onclick="upVote(' . $postId . ')"></div>
-                                <p class="post-cnt" id="post_1_cnt">' . $votesCNT . '</p>
-                                <div class="fa-solid fa-caret-down" style="color: black; font-size: 30px" onclick="downVote(' . $postId . ')"></div>
-                            </div>
-                        </td>
-                        <td class="card-table card-title">
-                            ' . $postTitle . '
-                        </td>
-                        <td  nowrap>
-                            <button onclick="location.href=\'/askepoka.al/account?username=' . $postUser . '\'" class="card-button">
-                            <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
-                                <p class="posted-by-username">' . $postUser . '</p>
-                            </div>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="card-table">
-                        <td colspan="3" class="card-table card-content">' . $postContent . '</td>
-                    </tr>
-                    <tr class="card-table">
-                        <td colspan="1" class="card-table card-date">
-                            <p class="posted-date">Date posted: ' . $timestampPosted . '</p>
-                        </td colspan="1" class="card-table card-controls">
-                        <td nowrap class="card-table card-controls">
-                            Comments
-                        </td>
-                    </tr>
-                </table>
-            </div>';
+                    <table class="card-table">
+                        <tr class="card-table">
+                            <td rowspan="3" colspan="1" class="card-table card-votes">
+                                <div class="votes">
+                                    <div id="upBtn_' . $postId . '" class="fa-solid fa-caret-up vote-btn-unchecked ' . $upBtnClass . '" onclick="upVote(' . $postId . ')"></div>
+                                    <p class="post-cnt" id="post_' . $postId . '_cnt">' . $votesCNT . '</p>
+                                    <div id="downBtn_' . $postId . '" class="fa-solid fa-caret-down vote-btn-unchecked ' . $downBtnClass . '" onclick="downVote(' . $postId . ')"></div>
+                                </div>
+                            </td>
+                            <td class="card-table card-title">
+                                ' . $postTitle . '
+                            </td>
+                            <td  nowrap>
+                                <button onclick="location.href=\'/askepoka.al/account?username=' . $postUser . '\'" class="card-button">
+                                <div class="posted-by-div"><img src="/askepoka.al/assets/images/defaultAvatar.jpg" alt="Avatar" class="avatar">
+                                    <p class="posted-by-username">' . $postUser . '</p>
+                                </div>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="card-table">
+                            <td colspan="3" class="card-table card-content">' . $postContent . '</td>
+                        </tr>
+                        <tr class="card-table">
+                            <td colspan="1" class="card-table card-date">
+                                <p class="posted-date">Date posted: ' . $timestampPosted . '</p>
+                            </td colspan="1" class="card-table card-controls">
+                            <td nowrap class="card-table card-controls">
+                                Comments
+                            </td>
+                        </tr>
+                    </table>
+                </div>';
             }
         } catch (Exception $e) {
             echo $e;

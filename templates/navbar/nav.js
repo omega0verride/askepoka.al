@@ -13,3 +13,9 @@ function searchMouseOver() {
     element = document.getElementById("search");
     element.className = "search-input-default search-input-hover";
 }
+
+function accountMenuOpen(){
+    document.getElementById("navAccountMenu").
+}
+
+theElement.addEventListener("touchend", accountMenuOpen, false);

@@ -67,27 +67,6 @@ $queries = [
 
 ];
 
-// SELECT *
-// FROM `posts`
-// LEFT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId`
-
-// UNION
-
-// SELECT *
-// FROM `posts`
-// RIGHT OUTER JOIN `votes` ON `votes`.`postId` = `posts`.`postId`
-
-    //  SELECT *
-// FROM `posts`
-// RIGHT OUTER JOIN `votes` ON `posts`.`postId` = `votes`.`postId`;SELECT *
-// FROM `posts`
-// RIGHT OUTER JOIN `votes` ON `posts`.`postId` = `votes`.`postId`;
-
-
-// insert into posts VALUES(null, "What is Lorem Ipsum?", "asdasdasdasdasdsfsdfsdgsg", "admin", null, null);
-// insert into posts VALUES(null, "What is Lorem Ipsum?", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "admin", null, null), (null, "What is Lorem Ipsum?", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "test", null, null);
-// update posts set title="post2" where postId=1
-
 foreach ($queries as $sql) {
     try {
         $result = $conn->exec($sql);

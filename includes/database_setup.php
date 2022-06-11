@@ -28,7 +28,7 @@ $queries = [
         `postId` int AUTO_INCREMENT NOT NULL,
         `title` varchar(100) NOT NULL,
         `content` TEXT(20000) NOT NULL,
-        `username` varchar(20) NOT NULL,
+        `username` varchar(20) NOT NULL ON DELETE CASCADE,
         `timestampPosted` timestamp default '1971-01-01 00:00:01', 
         `timestampUpdated` timestamp default now() on update now(),
     	FOREIGN KEY (username) REFERENCES users(username),    
@@ -52,8 +52,8 @@ $queries = [
         `username` varchar(20) NOT NULL,
         `value` boolean NOT NULL,
         `timestampSubmitted` timestamp default now() on update now(), 
-    	FOREIGN KEY (username) REFERENCES users(username),    
-    	FOREIGN KEY (postId) REFERENCES posts(postId),    
+    	FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE,    
+    	FOREIGN KEY (postId) REFERENCES posts(postId) ON DELETE CASCADE,    
         PRIMARY KEY (voteId)
     );
     ",

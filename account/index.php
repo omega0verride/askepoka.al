@@ -12,6 +12,8 @@ require("../src/config.php");
     <link rel="stylesheet" type="text/css" href="/askepoka.al/assets/css/posts_stylesheet.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/askepoka.al/assets/js/post_script.js"></script>
+    <script src="/askepoka.al/templates/dots_dropdown.js"></script>
+    <link rel="stylesheet" href="/askepoka.al/templates/dots_dropdown.css">
 </head>
 
 <body>
@@ -192,6 +194,10 @@ require("../src/config.php");
                 if ($userVoteValue == -1) {
                     $downBtnClass = "vote-btn-checked";
                 }
+                $postControlsUser="";
+                if ($postUser===getAuthUsername()){
+                    $postControlsUser='<a href="/askepoka.al/src/validate/validate_post_delete.php">Delete</a>';
+                }
                 echo '
                 <div class="card" id="post_' . $postId . '">
                     <table class="card-table">
@@ -222,7 +228,21 @@ require("../src/config.php");
                                 <p class="posted-date">Date posted: ' . $timestampPosted . '</p>
                             </td colspan="1" class="card-table card-controls">
                             <td nowrap class="card-table card-controls">
-                                Comments
+                                <div class="card-comment-btn">Comments</div>
+
+                                <div class="dots_dropdown card-settings">
+                                    <!-- three dots -->
+                                    <ul class="dropbtn icons" onclick="showDotsDropdown('.$postId.')">
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <!-- menu -->
+                                    <div id="card_menu_dropdown_'.$postId.'" class="dots_dropdown-content">
+                                        <a href="#">Save</a>
+                                        '.$postControlsUser .'
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </table>

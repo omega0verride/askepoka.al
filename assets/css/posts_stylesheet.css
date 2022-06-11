@@ -29,11 +29,13 @@
 .vote-btn-unchecked {
   color: black;
   font-size: 30px;
+  cursor: pointer
 }
 
 .vote-btn-checked {
   color: red;
   font-size: 30px;
+  cursor: pointer
 }
 
 .card-title {
@@ -74,11 +76,27 @@
   padding-bottom: 10px;
   color: rgb(0, 0, 0);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 
-.card-controls:hover {
-  color: blue
+.card-comment-btn{
+  display: inline-block;
+  cursor: pointer
 }
+
+.card-settings{
+  /* padding-left: 10px; */
+  display: inline-block;
+}
+
+.card-comment-btn:hover{
+  color: blue;
+}
+
+.card-settings:hover{
+  color: blue;
+}
+
 
 .card-votes {
   color: black;

@@ -194,9 +194,9 @@ require("../src/config.php");
                 if ($userVoteValue == -1) {
                     $downBtnClass = "vote-btn-checked";
                 }
-                $postControlsUser="";
-                if ($postUser===getAuthUsername()){
-                    $postControlsUser='<a href="/askepoka.al/src/validate/validate_post_delete.php">Delete</a>';
+                $postControlsUser = "";
+                if ($postUser === getAuthUsername()) {
+                    $postControlsUser = '<div onclick="confirmDelete(' . $postId . ', \'' . ROOT_URL . '/account' . '\')"> Delete </div>';
                 }
                 echo '
                 <div class="card" id="post_' . $postId . '">
@@ -232,15 +232,15 @@ require("../src/config.php");
 
                                 <div class="dots_dropdown card-settings">
                                     <!-- three dots -->
-                                    <ul class="dropbtn icons" onclick="showDotsDropdown('.$postId.')">
+                                    <ul class="dropbtn icons" onclick="showDotsDropdown(' . $postId . ')">
                                         <li></li>
                                         <li></li>
                                         <li></li>
                                     </ul>
                                     <!-- menu -->
-                                    <div id="card_menu_dropdown_'.$postId.'" class="dots_dropdown-content">
+                                    <div id="card_menu_dropdown_' . $postId . '" class="dots_dropdown-content">
                                         <a href="#">Save</a>
-                                        '.$postControlsUser .'
+                                        ' . $postControlsUser . '
                                     </div>
                                 </div>
                             </td>

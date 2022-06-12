@@ -118,11 +118,10 @@ require("../src/config.php");
             if ($userVoteValue == -1) {
                 $downBtnClass = "vote-btn-checked";
             }
-            $postControlsUser="";
-            if ($postUser===getAuthUsername()){
-                $postControlsUser='<a href="/askepoka.al/src/validate/validate_post_delete.php?id='.$postId.'">Delete</a>';
-            }$postControlsUser='<a href="/askepoka.al/src/validate/validate_post_delete.php?id='.$postId.'">Delete</a>';
-        
+            $postControlsUser = "";
+            if ($postUser === getAuthUsername()) {
+                $postControlsUser = '<div onclick="confirmDelete(' . $postId . ', \'' . ROOT_URL . '/home' . '\')"> Delete </div>';
+            }
 
             echo '
             <div class="card" id="post_' . $postId . '">

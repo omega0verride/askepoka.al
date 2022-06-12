@@ -4,7 +4,7 @@ function showDotsDropdown($postId) {
     var i;
     for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')&&openDropdown.id!="card_menu_dropdown_"+$postId) {
+        if (openDropdown.classList.contains('show') && openDropdown.id != "card_menu_dropdown_" + $postId) {
             openDropdown.classList.remove('show');
         }
     }
@@ -21,4 +21,16 @@ window.onclick = function (event) {
             }
         }
     }
+}
+
+
+function confirmDelete(postId, redirect=null) {
+    if (confirm('Sure To Remove This Record?')) {
+        url ="/askepoka.al/src/validate/validate_post_delete.php?id="+postId;
+        if (redirect){
+            url+="&redirect="+redirect;
+        }
+        window.location.href=url;
+    }
+
 }

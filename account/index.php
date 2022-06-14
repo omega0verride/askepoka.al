@@ -197,7 +197,7 @@ require("../src/config.php");
                     $downBtnClass = "vote-btn-checked";
                 }
                 $postControlsUser = "";
-                if ($postUser === getAuthUsername()) {
+                if ($postUser === getAuthUsername() || $role===0) {
                     $postControlsUser = '<div onclick="confirmDelete(' . $postId . ', \'' . ROOT_URL . '/account' . '\')"> Delete </div>';
                 }
                 echo '

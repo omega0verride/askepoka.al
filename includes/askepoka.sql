@@ -71,8 +71,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `name`, `surname`, `role`, `email`, `birthday`, `password`) VALUES
 ('admin', 'admin', 'admin', 0, 'indritbreti@gmail.com', '2000-01-01', '0192023a7bbd73250516f069df18b500'),
-('admin1', 'admin', 'admin', 1, 'indritbreti@gmail.com', '2002-02-22', '0192023a7bbd73250516f069df18b500'),
-('admin2', 'admin', 'admin', 1, 'indritbreti@gmail.com', '2002-02-22', '0192023a7bbd73250516f069df18b500'),
+('notadmin', 'notadmin', 'notadmin', 1, 'indritbreti@gmail.com', '2002-02-22', '0192023a7bbd73250516f069df18b500'),
+('not_admin1', 'notadmin', 'notadmin', 1, 'indritbreti@gmail.com', '2002-02-22', '0192023a7bbd73250516f069df18b500'),
 ('indritbreti', 'Indrit', 'Breti', 1, 'indritbreti@gmail.com', '2002-05-08', '268b114460ce1f360d57d8dc03ec8d56'),
 ('test', 'admin', 'admin', 1, 'indritbreti@gmail.com', '2222-02-22', '16d7a4fca7442dda3ad93c9a726597e4');
 
@@ -97,9 +97,9 @@ CREATE TABLE `votes` (
 INSERT INTO `votes` (`voteId`, `postId`, `username`, `value`, `timestampSubmitted`) VALUES
 (1, 1, 'admin', 1, '2022-06-13 17:49:17'),
 (2, 3, 'admin', -1, '2022-06-13 17:49:17'),
-(3, 1, 'admin2', 1, '2022-06-13 17:49:17'),
-(4, 3, 'admin2', 1, '2022-06-13 17:49:17'),
-(5, 3, 'admin1', 1, '2022-06-13 17:49:17');
+(3, 1, 'not_admin1', 1, '2022-06-13 17:49:17'),
+(4, 3, 'not_admin1', 1, '2022-06-13 17:49:17'),
+(5, 3, 'notadmin', 1, '2022-06-13 17:49:17');
 
 --
 -- Indexes for dumped tables

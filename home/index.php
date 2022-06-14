@@ -69,6 +69,19 @@ require("../src/config.php");
 
     try {
 
+        $sql = 'SELECT role  FROM users WHERE username =  ?';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(getAuthUsername()));
+        $row = $stmt->fetch();
+        if ($row == null) {
+            echo "User not found!";
+            $_SESSION["error"] = "User not found!";
+            die();
+        }
+        $role = $row["role"];
+        
+
         if (isset($_GET["search"])) {
             $param = "%" . strtolower($_GET['search']) . "%";
             $sql = 'SELECT `posts`.`postId` as postId, title, content, `posts`.`username` as username, timestampPosted, timestampUpdated, voteId, value, timestampSubmitted
@@ -119,7 +132,7 @@ require("../src/config.php");
                 $downBtnClass = "vote-btn-checked";
             }
             $postControlsUser = "";
-            if ($postUser === getAuthUsername()) {
+            if ($postUser === getAuthUsername() || $role===0) {
                 $postControlsUser = '<div onclick="confirmDelete(' . $postId . ', \'' . ROOT_URL . '/home' . '\')"> Delete </div>';
             }
 

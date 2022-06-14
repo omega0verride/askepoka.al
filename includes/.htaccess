@@ -1,5 +1,5 @@
+Order deny,allow
+Deny from all
 
-    Order deny,allow
-    Allow from ::1
-    Allow from 127.0.0.1
-    Deny from all
+# Apache 2.4+
+Require all denied

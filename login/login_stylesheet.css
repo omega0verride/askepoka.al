@@ -111,27 +111,10 @@ body {
  background: #fff;
 }
 
-.custom-checkbox input[type="checkbox"],
-.custom-checkbox .checked {
- display: none;
-}
-
-.custom-checkbox input[type="checkbox"]:checked~.checked {
- display: inline-block;
-}
-
-.custom-checkbox input[type="checkbox"]:checked~.unchecked {
- display: none;
-}
-
 .container .form-content {
  display: flex;
  align-items: center;
  justify-content: space-between;
-}
-
-.showPass {
- float: right;
 }
 
 .form-content .login-form,

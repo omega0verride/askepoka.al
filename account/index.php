@@ -30,6 +30,8 @@ require("../src/config.php");
                     <form name="search" action="/askepoka.al/account">
                         <span class="fa fa-lg fa-search" style="margin-right: -35px;"></span>
                         <input type="text" class="search-input-default" name="search" id="search" spellcheck="false" oninput="searchMouseOut()" onmouseover="searchMouseOver()" onmouseout="searchMouseOut()">
+                        <?php if(isset($_GET["username"])) echo '<input type="text" name="username" value='.$_GET["username"].' hidden>'?>
+                        <input type="submit" hidden />
                     </form>
                 </div>
 
@@ -84,7 +86,7 @@ require("../src/config.php");
                 $surname = $row["surname"];
                 $date = $row["birthday"];
                 $email = $row["email"];
-                $username = $row["username"];
+                // $username = $row["username"];
             } catch (Exception $e) {
                 echo $e;
             };
@@ -125,7 +127,7 @@ require("../src/config.php");
                 $name = $row["name"];
                 $surname = $row["surname"];
                 $email = $row["email"];
-                $username = $row["username"];
+                // $username = $row["username"];
             } catch (Exception $e) {
                 echo $e;
             };
